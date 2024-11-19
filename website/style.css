@@ -1,0 +1,191 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+header {
+    font-family: "Orbitron";
+    position: relative;
+    text-align: center;
+    padding: 20px;
+    background-color: white;
+    color: white;
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin: 0;
+    position: relative;
+    display: inline-block;
+    background: white;
+    color: black;
+    font-weight: 100;
+    padding: 0 10px;
+    z-index: 1; 
+}
+
+header hr {
+    border: 0;
+    height: 1px;
+    background: black;
+    width: 100%;
+    position: absolute;
+    top: 50%; 
+    left: 0;
+    z-index: 0; 
+}
+
+.modele{
+    border-right: 1px black solid;
+}
+
+nav {
+    font-family: "Orbitron";
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    background: linear-gradient(180deg, white, #d1d1d1);
+    padding-bottom: 1%;
+}
+
+nav a {
+    font: italic 100;
+    color: black;
+    text-decoration: none;
+    margin: 0 15px;
+}
+
+nav a:hover {
+color: #cc0000;
+transition: 0.3s;
+}
+
+.login{
+    display: flex;
+    float: right;
+    margin-left: 5%;
+}
+
+.section1{
+    display: flex ;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    background-image: linear-gradient(#d1d1d12a, rgba(0, 255, 170, 0.041)),  url('pictures/1623265899-Porsche_918_Spyder_automobili\ 00.jpg');
+    background-repeat: no-repeat;
+    background-size: auto 125%;
+    background-position: center 60%;
+    filter: brightness(90%);
+}
+
+.section1 h2{
+    padding-top: 4%;
+    font-size:xx-large;
+    margin: 0;
+    font-family:"Orbitron";
+    color: white;
+}
+h2 a{
+    color: white;
+    text-decoration: none;
+}
+
+h2 a:hover{
+    color: #cc0000;
+    transition: 0.3s;
+}
+
+.container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+}
+
+.car-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.car-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    width: calc(33.333% - 20px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.car-card:hover {
+    transform: scale(1.05);
+}
+
+.car-image img {
+    width: 100%;
+    height: auto;
+}
+
+.car-info {
+    padding: 15px;
+    text-align: center;
+}
+
+.car-info h3 {
+    margin: 10px 0;
+}
+
+.car-info p {
+    margin: 5px 0;
+    color: #555;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: relative;
+}
+
+
+@media (max-width: 768px) {
+    .car-card {
+        width: calc(50% - 20px);
+    }
+}
+
+@media (max-width: 480px) {
+    .car-card {
+        width: 100%;
+    }
+
+    nav {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav a {
+        margin: 5px 0;
+    }
+
+    .modele{
+        border: none;
+    }
+    .login{
+        margin: 0;
+        align-items: center;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+    }
+    
+}
