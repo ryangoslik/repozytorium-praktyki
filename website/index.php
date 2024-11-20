@@ -1,3 +1,8 @@
+<?php
+session_start();
+?>
+
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -9,20 +14,28 @@
 <body>
 
     <header>
-        <h1>PORSCHE</h1>
-        <hr>
+        <a href="index.php"> <h1>PORSCHE</h1>
+        <hr></a>
     </header>
    
 
+    
     <nav>
-        <div class="modele"><a href="#">Modele</a></div>
-        <a href="#">Serwis</a>
-        <a href="#">Personalizacja</a>
-        <a href="#">Historia</a>
-        <a href="#">Kontakt</a>
-        <div class="login"><a href="#">Zarejestruj</a> <a href="#">Zaloguj</a> </div>
-    </nav>
-
+    <div class="modele"><a href="#">Modele</a></div>
+    <a href="#">Serwis</a>
+    <a href="#">Personalizacja</a>
+    <a href="#">Historia</a>
+    <a href="#">Kontakt</a>
+    <div class="login">
+        <?php if (isset($_SESSION['user_name'])): ?>
+            <span>Witaj, <?php echo htmlspecialchars($_SESSION['user_name']); ?></span>
+            <a href="logout.php">Wyloguj</a>
+        <?php else: ?>
+            <a href="zarejestruj.php">Zarejestruj</a> 
+            <a href="zaloguj.php">Zaloguj</a>
+        <?php endif; ?>
+    </div>
+</nav>
     <section class="section1">
         <h2><a href="#">PORSCHE 918 SPYDER</a></h2>
     </section>

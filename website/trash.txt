@@ -1,0 +1,7 @@
+if(!empty($_POST['login']) && !empty($_POST['password'])){
+
+    
+     if($_Post['login'] == $login ){
+        $password = password_hash($password, PASSWORD_DEFAULT);
+    }
+}
