@@ -30,7 +30,7 @@ if($password1!=$password2){
 }
 
 $haslo_hash = password_hash($password1, PASSWORD_DEFAULT);
-$haslo_hash = $password1;
+
 if(!isset($_POST['rules'])){
     $wszystko_OK = false;
     $_SESSION['e_rules']="Prosimy o potwierdzenie regulaminu";
@@ -66,6 +66,7 @@ try{
         if($wszystko_OK==true){
         if($conn->query("INSERT INTO users VALUES (NULL,'$login1','$haslo_hash','$username1')")){
             $_SESSION['udanarejestracja']=true;
+            
             header("Location: zaloguj.php");
             exit();
         }else{
