@@ -28,7 +28,7 @@ session_start();
     <a href="#">Kontakt</a>
     <div class="login">
         <?php if (isset($_SESSION['user_name'])): ?>
-            <span>Witaj, <?php echo htmlspecialchars($_SESSION['user_name']); ?></span>
+            <span>Witaj, <?php echo htmlspecialchars($_SESSION['user_name']); ?>!</span>
             <a href="logout.php">Wyloguj</a>
         <?php else: ?>
             <a href="zarejestruj.php">Zarejestruj</a> 

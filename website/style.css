@@ -257,6 +257,99 @@ width: 10vh;
     
 }
 
+.rejestr_p{
+    color: black;
+    font-family: "Orbitron";
+    text-align: center;
+}
+.formularz1 .rejestr_butt{
+    width: 10vw;
+    padding: 2%;
+    margin: 0.5%;
+    border: 2px black solid;
+    font-size: large;
+    border-radius: 5px;
+    margin-left: 10vw;
+    margin-right: 10.1vw;
+    float: right;
+    color: white;
+    background-color: black;
+}
+
+.formularz1 input {
+    width: 23vw;
+    padding: 2%;
+    margin: 0.5%;
+    border: 2px black solid;
+    font-size: large;
+    font-family: 'Orbitron';
+    border-radius: 5px;
+    margin-left: 10vw;
+}
+
+.formularz1{
+    margin-top: 10vh;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    margin-left: 1%;
+    margin-right: 1%;
+    position: sticky;
+}
+
+.left{
+    width: 50vw;
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+    background-position: center 60%;
+    filter: brightness(90%);
+   padding-right: 2%;
+}
+.left img{
+    width: 52vw;
+    height: 106vh;
+    clip-path: inset(0 0 0 0);
+    margin-top: -15vh;
+    object-fit: cover;     
+    object-position: top;  
+    display: block;                  
+    padding: 0;    
+    
+}
+label{
+    margin-left: -11vw;
+}
+.checkbox{
+    margin-left: -11vw;
+}
+
+.error{
+    font-family: 'orbitron';
+    color:#cc0000;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    text-align: center;
+    font-size: medium;
+}
+
+.back1{
+    display: flex;
+    position: absolute;
+    color: #a0a0a0;
+    font-size: xx-large;
+    margin-left: 1vw;
+    z-index: 1;
+}
+.back1 a{
+    color:#a0a0a0;
+    text-decoration: none;
+}
+.back1 a:hover{
+    color: #cc0000;
+    transition: 0.3s;
+}
+
 @media (max-width: 768px) {
     nav{
         font-size:small;
@@ -317,7 +410,7 @@ width: 10vh;
 
 
     main{
-        margin-bottom: 30vh;
+    margin-bottom: 20vh;
     display: flex;
     justify-content: center;   
     height: 100vh;  
@@ -326,7 +419,7 @@ width: 10vh;
      
     }
     .formularz{
-        margin-top: 15vh;
+    margin-top: 15vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -395,5 +488,59 @@ width: 10vh;
     width: 100%;
     margin-left: -0.5vw;
     }
+    .left img{
+        display: none;
+    }
+    .left{
+        display: none;
+    }
+    .rejestr_p{
+        color: black;
+        font-family: "Orbitron";
+        text-align: center;
+    }
+    .formularz1 .rejestr_butt{
+        width: 95vw;
+        padding: 2%;
+        margin: 0.5%;
+        border: 2px black solid;
+        font-size: large;
+        border-radius: 5px;
+        float: right;
+        color: white;
+        background-color: black;
+    }
     
+    .formularz1 input {
+        width: 90vw;
+        padding: 2%;
+        margin: 0.5%;
+        border: 2px black solid;
+        font-size: large;
+        font-family: 'Orbitron';
+        border-radius: 5px;
+        margin-left: 1vw;
+    }
+    
+    .formularz1{
+        display: flex;
+        justify-content: center;
+        margin-top: 1vh;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: auto;
+        position: sticky;
+    }
+    .back1{
+        margin-top: -78vh;
+        margin-left: 4vw;
+    }
+    .checkbox{
+        margin-top: 1vh;
+        margin-left: -30vw;
+    }
+    label{
+        margin-left: -42vw;
+    }
 }

@@ -24,6 +24,12 @@ session_start();
     <br>
     <input type="password" name="password" placeholder="Hasło">
     <br>
+    <?php
+    if(isset($_SESSION['e_zal'])){
+        echo'<div class="error">'.$_SESSION['e_zal'].'</div>';
+        unset($_SESSION['e_zal']);
+    }
+    ?>
     <button type="submit">Zaloguj się</button>
     <div class="none"><p> Nie posiadasz konta? <a href="zarejestruj.php" >Zarejestruj tutaj!</a></p></div>
  </form>

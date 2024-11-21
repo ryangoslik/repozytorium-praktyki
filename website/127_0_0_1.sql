@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Lis 20, 2024 at 01:13 PM
+-- Generation Time: Lis 21, 2024 at 01:55 PM
 -- Wersja serwera: 10.4.32-MariaDB
 -- Wersja PHP: 8.2.12
 
@@ -41,7 +41,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `login`, `password`, `name`) VALUES
-(1, 'user0', 'qwerty', 'uzytkownik0');
+(14, 'gosling133', 'password1!', 'ryangosling133'),
+(15, 'login0', 'password', 'uzytkownik0');
 
 --
 -- Indeksy dla zrzutów tabel
@@ -61,7 +62,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
