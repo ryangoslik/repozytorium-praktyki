@@ -26,12 +26,12 @@ session_start();
     <br>
     <?php
     if(isset($_SESSION['e_zal'])){
-        echo'<div class="error">'.$_SESSION['e_zal'].'</div>';
+        echo'<div class="error1">'.$_SESSION['e_zal'].'</div>';
         unset($_SESSION['e_zal']);
     }
     ?>
     <button type="submit">Zaloguj się</button>
-    <div class="none"><p> Nie posiadasz konta? <a href="zarejestruj.php" >Zarejestruj tutaj!</a></p></div>
+    <div class="none"><p> Nie posiadasz konta?<br> <a href="zarejestruj.php" >Zarejestruj tutaj!</a></p></div>
  </form>
   </section>
 <div class="right"><img src="https://i.pinimg.com/originals/c5/57/c9/c557c9d6fd4b25dbc8e9992a045d0dd4.jpg" alt="" srcset=""></div>
