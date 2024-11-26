@@ -90,7 +90,7 @@ catch(Exception $e){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Strona z samochodami</title>
-    <link rel="stylesheet" href="style2.css">
+    <link rel="stylesheet" href="style1.css">
   
 </head>
 <body>

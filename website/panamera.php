@@ -214,16 +214,8 @@ session_start();
                         color: black;
                     }
 
-                     .out{
-                        text-decoration:none;
-                        color: black;
-                    }
-                        .r{
-                        color: black;
-                        transition: 0.3s;
-                    }
-                        .r:hover{
-                        color:#cc0000;
+                    .out{
+
                     }
                 </style>
             </head>
@@ -246,7 +238,7 @@ session_start();
                         <button type="submit">Wyślij</button>
                     </form>
                     
-                    <a href="zaloguj.php" class="out"><h3>Posiadasz konto? <span class="r">Zaloguj się tutaj.</span></h3></a>
+                    <a href="zaloguj.php" class="out"><h3>Posiadasz konto? Zaloguj się tutaj.</h3></a>
                     
                 </div>
             </body>

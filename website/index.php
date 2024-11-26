@@ -9,7 +9,7 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Strona z samochodami</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style1.css">
 </head>
 <body>
 
@@ -37,7 +37,7 @@ session_start();
     </div>
 </nav>
     <section class="section1">
-        <h2><a href="spyder.php">PORSCHE 918 SPYDER</a></h2>
+        <h2 class="p_s_h2"><a href="spyder.php">PORSCHE 918 SPYDER</a></h2>
     </section>
     <div class="container" id="nasze_modele">
         <h2>Nasze Modele</h2>
@@ -54,7 +54,7 @@ session_start();
                     </div></a>
             </div>
 
-            <div class="car-card"><a href="718.php">
+            <div class="car-card"><a href="911.php">
                 <div class="car-image">
                     <img src="https://files.porsche.com/filestore/image/multimedia/none/911-tus-modelimage-sideshot/model/930894f1-6214-11ea-80c8-005056bbdc38/porsche-model.png" alt="Samochód 1">
                 </div>
@@ -76,7 +76,7 @@ session_start();
                     </div></a>
             </div>
 
-            <div class="car-card"><a href="718.php">
+            <div class="car-card"><a href="taycan.php">
                 <div class="car-image">
                     <img src="https://www.swaggermagazine.com/home/wp-content/uploads/2019/09/porsche-thumbnail-1.png?x96600" alt="Samochód 1">
                 </div>
@@ -87,7 +87,7 @@ session_start();
                     </div></a>
             </div>
 
-            <div class="car-card"><a href="718.php">
+            <div class="car-card"><a href="panamera.php">
                 <div class="car-image">
                     <img src="https://porsche-vietnam.vn/wp-content/uploads/2024/05/972-g3-v6-modelimage-sideshot.png" alt="Samochód 1">
                 </div>
@@ -98,7 +98,7 @@ session_start();
                     </div></a>
             </div>
 
-            <div class="car-card"><a href="718.php">
+            <div class="car-card"><a href="cayenne.php">
                 <div class="car-image">
                     <img src="https://files.porsche.com/filestore/image/multimedia/none/9yb-e3-c-tu-modelimage-sideshot/model/104c07d3-a8d4-11eb-80d5-005056bbdc38/porsche-model.png" alt="Samochód 1">
                 </div>
