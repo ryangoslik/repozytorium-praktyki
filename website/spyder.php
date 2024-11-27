@@ -21,7 +21,7 @@ session_start();
 
     
     <nav>
-    <div class="modele"><a href="#nasze_modele">Modele</a></div>
+    <div class="modele"><a href="index.php">Modele</a></div>
     <a href="#">Serwis</a>
     <a href="#">Personalizacja</a>
     <a href="#">Historia</a>
@@ -83,11 +83,23 @@ session_start();
     </div>
     
 </main>
+<div class="width">
+<section class="">
+<section class="video-section">
+        <h2>Odkryj Porsche 911 Turbo S</h2>
+        <iframe src="https://www.youtube.com/embed/Wo_6X25DXAQ" 
+                title="Porsche: Dynamiczny film" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+        </iframe>
+    </section>
+
+</section>
 <section class="sekcja_p_s">
 <h2 class="p_s">NO LIMITS.</h2>
 
 </section>
-
+<div class="main2">
     <section class="sekcja2_p_s">
 <img class="img_p1" src="https://i.pinimg.com/originals/c4/95/56/c4955632ad49a3cb996dd19903a1dd11.jpg" alt="" srcset="">
     
@@ -99,12 +111,16 @@ session_start();
     <section class="sekcja2_p_s">
         
             <div class="left_o">
-                <h2>Wydajność</h2><br><span class="red">Porsche 918 Spyder</span> jest wyjątkowo wydajnym samochodem sportowym, który łączy w sobie moc i efektywność. W porównaniu do swojej poprzedniczki, Porsche Carrera GT, model 918 Spyder oferuje znacznie większą moc silnika V8 o mocy 608 KM. To niespotykane połączenie mocy i precyzji sprawia, że ten samochód ma zupełnie nowe możliwości.</div><img class="img_p2" src="https://p.turbosquid.com/ts-thumb/K2/Si84lj/5x/porsche_918_spyder_06/jpg/1637859117/1920x1080/fit_q87/9a42d2675f7f5dddf38055f7a6bde51bf8604c26/porsche_918_spyder_06.jpg" alt="" srcset="">
+                <h2>Wydajność</h2><br><span class="red">Porsche 918 Spyder</span> jest wyjątkowo wydajnym samochodem sportowym, który łączy w sobie moc i efektywność. W porównaniu do swojej poprzedniczki, Porsche Carrera GT, model 918 Spyder oferuje znacznie większą moc silnika V8 o mocy 608 KM. To niespotykane połączenie mocy i precyzji sprawia, że ten samochód ma zupełnie nowe możliwości.</div><img class="img_p2" src="https://p.turbosquid.com/ts-thumb/K2/Si84lj/5x/porsche_918_spyder_06/jpg/1637859117/1920x1080/fit_q87/9a42d2675f7f5dddf38055f7a6bde51bf8604c26/porsche_918_spyder_06.jpg" alt="" srcset=""></div>
     </section>
-<footer>
-    <p>© 2024 Strona z Samochodami. Wszelkie prawa zastrzeżone.</p>
-</footer>
-
+    <footer>
+        <p class="first">© 2024 Porsche Polska. Polityka prywatności | Ustawienia plików cookie | System zgłoszeń naruszeń</p>
+        <p>Od 1 września 2018 r. wszystkie nowe pojazdy wprowadzane do obrotu w Unii Europejskiej muszą być badane i homologowane zgodnie z procedurą WLTP określoną w rozporządzeniu Komisji (UE) 2017/1151. WLTP zapewnia bardziej rygorystyczne warunki badania i bardziej realistyczne wartości zużycia paliwa i emisji CO2 w porównaniu do stosowanej to tej pory metody NEDC. Prezentowane dane dotyczące wartości zużycia paliwa i emisji CO2 są danymi zgodnymi ze świadectwem homologacji typu wyznaczonymi zgodnie z procedurą WLTP. Więcej informacji na temat WLTP na stronie: porsche.pl/wltp.</p>
+        <p>Wszelkie prezentowane informacje, w szczególności zdjęcia, wykresy, specyfikacje, opisy, rysunki lub parametry techniczne nie stanowią oferty w rozumieniu Kodeksu cywilnego oraz nie są wiążące i mogą ulec zmianie bez wcześniejszego powiadomienia. Prezentowane informacje nie stanowią zapewnienia w rozumieniu art. 556(1)§2 Kodeksu cywilnego. Z uwagi na ograniczenia parametrów ekranu, na którym obraz jest wyświetlany, przedstawione kolory mogą nieznacznie różnić się od faktycznych kolorów lakieru i materiałów.</p>
+        <p>Porsche zastrzega sobie możliwość wprowadzenia zmian w prezentowanych wersjach. Przedstawione detale wyposażenia mogą różnić się od specyfikacji przewidzianej na rynek polski. Zamieszczone zdjęcia mogą przedstawiać wyposażenie opcjonalne, dostępne za dopłatą. Wiążące ustalenie ceny, wyposażenia i specyfikacji pojazdu następują w umowie sprzedaży, a określenie parametrów technicznych zawiera świadectwo homologacji typu pojazdu. Zastrzegamy sobie prawo do zmian i pomyłek. Wszelkie informacje prezentowane na stronie są aktualne na dzień ich zamieszczania. W celu uzyskania najnowszych informacji prosimy kontaktować się z Autoryzowanym Dealerem Marki Porsche.</p>
+        <p>Wszystkie produkowane obecnie samochody marki Porsche są wykonywane z materiałów spełniających pod względem możliwości odzysku i recyklingu wymagania określone w normie ISO 22628 i są zgodne z europejskimi świadectwami homologacji wydanymi wg dyrektywy 2005/64/WE. Volkswagen Group Polska sp. z o.o. podlega obowiązkowi zapewnienia wszystkim użytkownikom samochodów grupy sieci odbioru pojazdów po wycofaniu ich z eksploatacji, zgodnie z wymaganiami ustawy z 20 stycznia 2005 r. o recyklingu pojazdów wycofanych z eksploatacji. Więcej informacji dotyczących ekologii znajdą Państwo na stronie: porsche.pl/porsche-impact/</p>
+    </footer>
+    </div>
 <script>
     function zdjecie1() {
         let mainimg = document.getElementById("glowne");

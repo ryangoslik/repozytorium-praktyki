@@ -69,7 +69,7 @@ session_start();
             <li>650(KM)</li>
             <li>3745</li>
             <li>330</li>
-            <li>2.6 (s)</li>
+            <li>2.7 (s)</li>
             <li>800</li>
             <li>ręczna skrzynia biegów</li>
             <li>6</li>
@@ -83,27 +83,41 @@ session_start();
     </div>
     
 </main>
-<section class="sekcja_p_p">
-<h2 class="p_s">KNOW YOUR PATH</h2>
+<section class="">
+<section class="video-section">
+        <h2>Odkryj Porsche 911 Turbo S</h2>
+        <iframe width="1250" height="703" 
+            src="https://www.youtube.com/embed/nT2mjvWC3e8" 
+            title="Porsche 911 Turbo S: Highlights" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            referrerpolicy="strict-origin-when-cross-origin" 
+            allowfullscreen>
+        </iframe>
+    </section>
 
 </section>
-
+<div class="main2">
     <section class="sekcja2_p_s">
-<img class="img_p1" src="" alt="" srcset="">
+<img class="img_p1" src="https://purepng.com/public/uploads/large/purepng.com-porsche-911-turbo-silver-carcarvehicletransportporsche-961524645184kdemk.png" alt="" srcset="">
     
 
             <div class="left_o">
             
-                <h2></h2><br> <span class="red">Porsche 911 Tubro S</span> </div>
+                <h2>Design</h2><br> <span class="red">Porsche 911 Turbo S</span> łączy elegancję i agresję, typową dla ikony motoryzacji. Smukła, aerodynamiczna sylwetka podkreślona szerokimi nadkolami i niskim profilem zapewnia doskonałe właściwości jezdne. Charakterystyczne okrągłe reflektory LED, tylny spojler oraz potężne wloty powietrza nadają mu sportowy charakter. Wykończenie wnętrza łączy luksusowe materiały, takie jak skóra i włókno węglowe, z zaawansowaną technologią, oferując zarówno komfort, jak i nowoczesność.</div>
     </section>
     <section class="sekcja2_p_s">
         
             <div class="left_o">
-            <h2></h2><br> <span class="red">Porsche 911 Tubro S</span></div><img class="img_p2" src="" alt="" srcset="">
+                <h2>Wydajność</h2><br><span class="red">Porsche 911 Turbo S</span> to szczyt wydajności w swojej klasie. Napędzany 3,8-litrowym silnikiem bokser o mocy 650 KM i 800 Nm momentu obrotowego, osiąga przyspieszenie od 0 do 100 km/h w zaledwie 2,7 sekundy. Napęd na wszystkie koła (Porsche Traction Management) zapewnia doskonałą trakcję w każdych warunkach. </div><img class="img_p2" src="https://files.porsche.com/filestore/image/multimedia/none/911-tus-modelimage-sideshot/model/930894f1-6214-11ea-80c8-005056bbdc38/porsche-model.png" alt="" srcset=""></div>
     </section>
-<footer>
-    <p>© 2024 Strona z Samochodami. Wszelkie prawa zastrzeżone.</p>
-</footer>
+    <footer>
+        <p class="first">© 2024 Porsche Polska. Polityka prywatności | Ustawienia plików cookie | System zgłoszeń naruszeń</p>
+        <p>Od 1 września 2018 r. wszystkie nowe pojazdy wprowadzane do obrotu w Unii Europejskiej muszą być badane i homologowane zgodnie z procedurą WLTP określoną w rozporządzeniu Komisji (UE) 2017/1151. WLTP zapewnia bardziej rygorystyczne warunki badania i bardziej realistyczne wartości zużycia paliwa i emisji CO2 w porównaniu do stosowanej to tej pory metody NEDC. Prezentowane dane dotyczące wartości zużycia paliwa i emisji CO2 są danymi zgodnymi ze świadectwem homologacji typu wyznaczonymi zgodnie z procedurą WLTP. Więcej informacji na temat WLTP na stronie: porsche.pl/wltp.</p>
+        <p>Wszelkie prezentowane informacje, w szczególności zdjęcia, wykresy, specyfikacje, opisy, rysunki lub parametry techniczne nie stanowią oferty w rozumieniu Kodeksu cywilnego oraz nie są wiążące i mogą ulec zmianie bez wcześniejszego powiadomienia. Prezentowane informacje nie stanowią zapewnienia w rozumieniu art. 556(1)§2 Kodeksu cywilnego. Z uwagi na ograniczenia parametrów ekranu, na którym obraz jest wyświetlany, przedstawione kolory mogą nieznacznie różnić się od faktycznych kolorów lakieru i materiałów.</p>
+        <p>Porsche zastrzega sobie możliwość wprowadzenia zmian w prezentowanych wersjach. Przedstawione detale wyposażenia mogą różnić się od specyfikacji przewidzianej na rynek polski. Zamieszczone zdjęcia mogą przedstawiać wyposażenie opcjonalne, dostępne za dopłatą. Wiążące ustalenie ceny, wyposażenia i specyfikacji pojazdu następują w umowie sprzedaży, a określenie parametrów technicznych zawiera świadectwo homologacji typu pojazdu. Zastrzegamy sobie prawo do zmian i pomyłek. Wszelkie informacje prezentowane na stronie są aktualne na dzień ich zamieszczania. W celu uzyskania najnowszych informacji prosimy kontaktować się z Autoryzowanym Dealerem Marki Porsche.</p>
+        <p>Wszystkie produkowane obecnie samochody marki Porsche są wykonywane z materiałów spełniających pod względem możliwości odzysku i recyklingu wymagania określone w normie ISO 22628 i są zgodne z europejskimi świadectwami homologacji wydanymi wg dyrektywy 2005/64/WE. Volkswagen Group Polska sp. z o.o. podlega obowiązkowi zapewnienia wszystkim użytkownikom samochodów grupy sieci odbioru pojazdów po wycofaniu ich z eksploatacji, zgodnie z wymaganiami ustawy z 20 stycznia 2005 r. o recyklingu pojazdów wycofanych z eksploatacji. Więcej informacji dotyczących ekologii znajdą Państwo na stronie: porsche.pl/porsche-impact/</p>
+    </footer>
 
 <script>
     function zdjecie1() {

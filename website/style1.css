@@ -10,6 +10,7 @@
 html{
     box-sizing: 0;
     scroll-behavior: smooth;
+    max-width: 100vw;
 }
 
 body {
@@ -219,12 +220,34 @@ h2 a:hover{
 }
 
 footer {
-    background-color: #000000;
+    background-color: #191b22;
     color: white;
-    text-align: center;
+    text-align: start;
     padding: 2.5vh;
     position: relative;
-    
+    font-family: tomorrow;
+    font-weight: 300;
+}
+.first{
+    border-top: 1px solid #5c5c5c;
+    padding-top: 1vh;
+}
+
+.map{
+    text-align: center;
+    margin-top: 10vh;
+}
+
+.map h2{
+    font-family: 'orbitron';
+    transition: 0.3s;
+}
+.map img{
+    width: 60vw;
+    margin: 2vh;
+}
+.map h2:hover{
+    color: #cc0000;
 }
 
 main{
@@ -607,9 +630,10 @@ color: black;
 }
 .left_o{
     font-family: tomorrow;
-    width: 46vw;
-    padding: 2vw;
+    width: 50vw;
+    padding: 1vw;
     font-size: 3vh;
+    margin-left: 2vw;
 }
 .left_o h2{
     margin: 0;
@@ -634,6 +658,65 @@ color: black;
     filter: brightness(90%);
     font-family: orbitron;
 }
+.img_p911{
+    width: 100vw;
+    height: 100vh;
+}
+.main3{
+    margin-top: -20vh;
+    background-image: url(https://www.allesauto.at/wp-content/uploads/2015/12/10_911-Turbo-S-Interieur.jpg);
+    filter: brightness(80%);
+    color: white;
+}
+
+.main3 .sekcja2_p_s
+
+.main3 h2{
+    margin-bottom: -15vh;
+}
+
+.main3 .left_o{
+
+    width: 95vw;
+}
+
+.video-section {
+    text-align: center; /* Wyśrodkowanie zawartości */
+    padding: 20px;
+    background-color: #f9f9f9; /* Opcjonalne tło */
+}
+
+.video-section h2 {
+    font-family: Arial, sans-serif;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.video-section iframe {
+    max-width: 100%; /* Dostosuj wideo do rozmiaru ekranu */
+    height: auto; /* Zachowaj proporcje */
+    border-radius: 10px; /* Zaokrąglone rogi, opcjonalnie */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Lekki cień, opcjonalnie */
+}
+
+
+.video-section {
+    position: relative;
+    padding-top: 56.25%; /* Proporcja 16:9 */
+    overflow: hidden;
+}
+
+.video-section iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.header_b .p718{
+    font-size: 4rem;
+}
 
 @media (max-width: 768px) {
     nav{
@@ -653,6 +736,12 @@ color: black;
 }
 
 @media (max-width: 480px) {
+    .video-section {
+        text-align: center; /* Wyśrodkowanie zawartości */
+        background-color: #f9f9f9; /* Opcjonalne tło */
+        margin-top: -20vh;
+    }
+    
     .car-card {
         width: 100%;
     }
@@ -1001,11 +1090,75 @@ color: black;
             .car{
                 display: flex;
                 flex-direction: column;
+                width: 90vw;
             }
             .hr_a{
                 width: 90vw;
             }
-}
+
+            .sekcja_p_s{
+                display: none;
+                width:100vw;
+                height: 100vh;
+                background-image: url('https://media.giphy.com/media/i0YPHdSegYQV2/giphy.gif');
+                background-repeat: no-repeat;
+                background-size: cover;
+                filter: brightness(90%);
+                font-family: orbitron;
+            }
+            .img_p1{
+                display: none;
+                width: 70vw;
+                height: 70vh;
+                margin-top: -35vh;
+                margin-bottom: -3vh;
+            }
+
+            .img_p2{
+                width: 80vw;
+                height: 80vh;
+                margin-bottom: 5.5vh;
+            }
+
+        
+            
+            .left_o{
+                display: flex;
+                flex-direction: column;
+                margin:0;
+                height: auto;
+                width: 95vw;
+                margin-top: -20vh;
+            }
+            .main2{
+                display: flex;
+                flex-direction: column;
+            }
+            .main3{
+                display: flex;
+                flex-direction: column;
+            }
+            .sekcja2_p_s{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 10vh;
+            }
+            .sekcja2_p_s h2{
+                margin-top: 2vh;
+                margin-bottom: -6vh;
+            }
+            .map img{
+                width: 95vw;
+                margin: 2vh;
+            }
+            .map{
+                text-align: center;
+                margin-top: 2vh;
+            }
+        }
+
 
 @media (width:1440px){
     body{
@@ -1118,4 +1271,23 @@ color: black;
                 filter: brightness(90%);
                 font-family: orbitron;
             }
-}
+            .img_p1{margin-top: 6vh;
+            }
+
+            .img_p2{
+                margin-left: 1vw;
+                margin-top: 16.5vh;
+                width: 50%;
+                height: 80%;
+            }
+
+            .sekcja2_p_s img{
+                
+            }
+            
+            .left_o{
+                margin-bottom: 5vh;
+                height: auto;
+                width: 50%;
+            }
+        }
