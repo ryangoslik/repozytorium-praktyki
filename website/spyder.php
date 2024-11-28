@@ -52,30 +52,17 @@ session_start();
             <div class="header_b">
                 <h2 class="spyder1">918 Spyder</h2>
             <h2 class="dt">Dane techniczne:<h2></div> <hr class="hr_a">
-            <div class="lista">
-                <div class="left_ul">
+            <div class="left_ul">
         <ul class="lista_l">
-            <li>Moc silnika:</li>
-            <li>Pojemność silnika:</li>
-            <li>Prędkość maksymalna:</li>
-            <li>Przyspieszenie 0 - 100 (s):</li>
-            <li>Moment obrotowy:</li>
-            <li>Typ skrzyni biegów:</li>
-            <li>Ilość biegów:</li>
-            <li>Rodzaj napędu:</li>
+            <li>Moc silnika: <span class="lista_p">652(kW)|887(KM)</span></li>
+            <li>Pojemność silnika: <span class="lista_p">4593</span></li>
+            <li>Prędkość maksymalna: <span class="lista_p">345</span></li>
+            <li>Przyspieszenie 0 - 100 (s): <span class="lista_p">2.6 (s)</span></li>
+            <li>Moment obrotowy: <span class="lista_p">1280</span></li>
+            <li>Typ skrzyni biegów: <span class="lista_p">dwusprzęgłowa</span></li>
+            <li>Ilość biegów: <span class="lista_p">7</span></li>
+            <li>Rodzaj napędu: <span class="lista_p">przedni</span></li>
         </ul></div>
-        
-        <ul class="lista_p">
-            <li>652(kW)|887(KM)</li>
-            <li>4593</li>
-            <li>345</li>
-            <li>2.6 (s)</li>
-            <li>1280</li>
-            <li>skrzynia dwusprzęgłowa</li>
-            <li>7</li>
-            <li>przedni</li>
-        </ul>
-        </div>
         <hr class="hr_a">
         <div class="lower">
         <h2 class="price">Cena: <span class="ch_c">1 725 000 EUR</span> (import)</h2>
@@ -145,13 +132,13 @@ session_start();
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
 
-        function otworzFormularz() {
-    const isLoggedIn = <?php echo isset($_SESSION['user_name']) ? 'true' : 'false'; ?>;
+function otworzFormularz() {
+        const isLoggedIn = <?php echo isset($_SESSION['user_name']) ? 'true' : 'false'; ?>;
 
-    if (isLoggedIn) {
-        const nowaStrona = window.open('', '_blank');
-        nowaStrona.document.write(`
-            <html lang="pl">
+        if (isLoggedIn) {
+            const nowaStrona = window.open('', '_blank');
+            nowaStrona.document.write(`
+                <html lang="pl">
             <head>
                 <meta charset="UTF-8">
                 <title>Realizacja zamówienia</title>
@@ -178,98 +165,10 @@ session_start();
             </body>
             </html>
         `);
-    } else {
-        const nowaStrona = window.open('', '_blank');
-        nowaStrona.document.write(`
-            <html lang="pl">
-            <head>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Formularz zakupu</title>
-                <style>
-                    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
-                    body {
-                        font-family: Orbitron, sans-serif;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        flex-direction: column;
-                        margin: 0;
-                        padding: 20px;
-                        background-color: #f9f9f9;
-                    }
-                    .formular {
-                        margin: 20px;
-                        padding: 20px;
-                        background-color: #f2f2f2;
-                        border-radius: 10px;
-                        width: 400px;
-                    }
-                    .formular input,
-                    .formular textarea {
-                        width: 100%;
-                        padding: 10px;
-                        margin: 10px 0;
-                        border-radius: 5px;
-                        border: 1px solid #ccc;
-                    }
-                    .formular button {
-                        width: 100%;
-                        font-family: Orbitron, sans-serif;
-                        color: white;
-                        background-color: black;
-                        font-size: large;
-                        border-radius: 5px;
-                        padding: 1%;
-                        margin-top: -1vh;
-                        cursor: pointer;
-                        transition: background-color 0.3s;
-                    }
-                    .formular button:hover {
-                        background-color: white;
-                        color: black;
-                    }
-
-                     .out{
-                        text-decoration:none;
-                        color: black;
-                    }
-                        .r{
-                        color: black;
-                        transition: 0.3s;
-                    }
-                        .r:hover{
-                        color:#cc0000;
-                    }
-                </style>
-            </head>
-            <body>
-                <h2>Formularz zakupu</h2>
-                <div class="formular">
-                    <form action="" method="POST">
-                        <label for="name">Imię i nazwisko:</label><br>
-                        <input type="text" id="name" name="name" required><br><br>
-
-                        <label for="email">E-mail:</label><br>
-                        <input type="email" id="email" name="email" required><br><br>
-
-                        <label for="adress">Adres:</label><br>
-                        <input type="text" id="adress" name="adress" required><br><br>
-
-                        <label for="message">Notka:</label><br>
-                        <textarea id="message" name="message" rows="4" required></textarea><br><br>
-
-                        <button type="submit">Wyślij</button>
-                    </form>
-                    
-                    <a href="zaloguj.php" class="out"><h3>Posiadasz konto? <span class="r">Zaloguj się tutaj.</span></h3></a>
-                    
-                </div>
-            </body>
-            </html>
-        `);
+        } else {
+            window.location.href = "formularz.php";
+        }
     }
-}
 </script>
 </body>
 </html>
