@@ -11,6 +11,68 @@ session_start();
     <title>Strona z samochodami</title>
     <link rel="stylesheet" href="style1.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+   @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+                    .mains{
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        flex-direction: column;
+                        margin: 0;
+                    }
+                    label{
+                        margin-left:0vw;
+                    }
+                    .formular {
+                        margin: 20px;
+                        padding: 40px;
+                        background-color: #f2f2f2;
+                        border-radius: 10px;
+                        width: 29%;
+                    }
+                    .formular input,
+                    .formular textarea {
+                        width: 96%;
+                        padding: 10px;
+                        margin: 10px 0;
+                        border-radius: 5px;
+                        border: 1px solid #ccc;
+                        
+                    }
+                    .formular button {
+                        width: 100%;
+                        font-family: Orbitron, sans-serif;
+                        color: white;
+                        background-color: black;
+                        font-size: large;
+                        border-radius: 5px;
+                        padding: 1%;
+                        margin-top: -1vh;
+                        cursor: pointer;
+                        transition: background-color 0.3s;
+                    }
+                    .formular button:hover {
+                        background-color: white;
+                        color: black;
+                    }
+
+                     a{
+                        text-decoration:none;
+                        color: black;
+                    }
+                        h3{
+                        color: black;
+                        transition: 0.3s;
+                    }
+                        h3:hover{
+                        color:#cc0000;
+                    }
+                    @media (max-width: 768px) {
+                        .formular {
+                            width: 60vw;
+                        }
+                    }
+                    </style>
 </head>
 <body>
 
@@ -26,7 +88,7 @@ session_start();
     <a href="#">Serwis</a>
     <a href="#">Personalizacja</a>
     <a href="historia.php">O Porsche</a>
-    <a href="kontakt.php">Kontakt</a>
+    <a href="#">Kontakt</a>
     <div class="login">
         <?php if (isset($_SESSION['user_name'])): ?>
             <span>Witaj, <?php echo htmlspecialchars($_SESSION['user_name']); ?>!</span>
@@ -37,93 +99,35 @@ session_start();
         <?php endif; ?>
     </div>
 </nav>
-    <section class="section1">
-        <h2 class="p_s_h2"><a href="spyder.php">PORSCHE 918 SPYDER</a></h2>
-    </section>
-    <div class="container" id="nasze_modele">
-        <h2>Nasze Modele</h2>
-        <div class="car-list">
+<div class="mains">
+<div class="formular">
+        <form action="" method="POST">
+            <label for="name">Imię i nazwisko:</label><br>
+            <input type="text" id="name" name="name" required><br><br>
 
-        <div class="car-card"><a href="spyder.php">
-                <div class="car-image">
-                    <img src="https://p.turbosquid.com/ts-thumb/K2/Si84lj/5x/porsche_918_spyder_06/jpg/1637859117/1920x1080/fit_q87/9a42d2675f7f5dddf38055f7a6bde51bf8604c26/porsche_918_spyder_06.jpg" alt="Samochód 1">
-                </div>
-                <div class="car-info">
-                    <h3 class="spyder">918 Spyder</h3>
-                    <p>Rok: 2015</p>
-                    <p>Cena: 1 725 000 EUR (import) </p>
-                    </div></a>
-            </div>
+            <label for="email">E-mail:</label><br>
+            <input type="email" id="email" name="email" required><br><br>
 
-            <div class="car-card"><a href="911.php">
-                <div class="car-image">
-                    <img src="https://files.porsche.com/filestore/image/multimedia/none/911-tus-modelimage-sideshot/model/930894f1-6214-11ea-80c8-005056bbdc38/porsche-model.png" alt="Samochód 1">
-                </div>
-                <div class="car-info">
-                    <h3 class="p911">911 Turbo S</h3>
-                    <p>Rok: 2024</p>
-                    <p>Cena: od 650 400 PLN</p>
-                    </div></a>
-            </div>
+            <label for="message">Wiadomość:</label><br>
+            <textarea id="mess" name="mess" rows="5" required></textarea><br><br>
 
-            <div class="car-card"><a href="718.php">
-                <div class="car-image">
-                    <img src="https://files.porsche.com/filestore/image/multimedia/none/982-718-c7s-modelimage-sideshot/model/af021b27-d5ba-11ec-80ef-005056bbdc38/porsche-model.png" alt="Samochód 1">
-                </div>
-                <div class="car-info">
-                    <h3 class="p718">718 Cayman S</h3>
-                    <p>Rok: 2024</p>
-                    <p>Cena: od 354 000 PLN</p>
-                    </div></a>
-            </div>
+            <label for="phone">Numer telefonu:</label><br>
+            <input type="tel" id="phone" name="phone" placeholder="000-000-000" pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}" required><br><br>
 
-            <div class="car-card"><a href="taycan.php">
-                <div class="car-image">
-                    <img src="https://www.swaggermagazine.com/home/wp-content/uploads/2019/09/porsche-thumbnail-1.png?x96600" alt="Samochód 1">
-                </div>
-                <div class="car-info">
-                    <h3 class="taycan">Taycan Turbo</h3>
-                    <p>Rok: 2024</p>
-                    <p>Cena: od 712 000 PLN</p>
-                    </div></a>
-            </div>
-
-            <div class="car-card"><a href="panamera.php">
-                <div class="car-image">
-                    <img src="https://porsche-vietnam.vn/wp-content/uploads/2024/05/972-g3-v6-modelimage-sideshot.png" alt="Samochód 1">
-                </div>
-                <div class="car-info">
-                    <h3 class="panamera">Panamera Turbo S</h3>
-                    <p>Rok: 2024</p>
-                    <p>Cena: od 897 000 PLN</p>
-                    </div></a>
-            </div>
-
-            <div class="car-card"><a href="cayenne.php">
-                <div class="car-image">
-                    <img src="https://files.porsche.com/filestore/image/multimedia/none/9yb-e3-c-tu-modelimage-sideshot/model/104c07d3-a8d4-11eb-80d5-005056bbdc38/porsche-model.png" alt="Samochód 1">
-                </div>
-                <div class="car-info">
-                    <h3 class="cayenne">Cayenne S</h3>
-                    <p>Rok: 2023</p>
-                    <p>Cena: od 553 000 PLN</p>
-                    </div></a>
-            </div>
-        </div>
+            <button type="submit">Wyślij</button>
+        </form>
+        
     </div>
-
-    <section class="map">
-    <h2>Salony Porsche w Polsce:</h2>    
-    <img src="https://porsche.pl/wp-content/themes/porsche/img/mapa_porsche_centrum_polska.jpg" alt="" srcset="">
-    <section><hr class="opor_hr">
-    <section class="opor_bottom">
+    </div>
+<section class="opor_bottom">
     <h2>Śledź nas na naszych mediach społecznościowych!</h2>
-                        <div class="icons">
+                    <div class="icons">
                         <a href="https://pl-pl.facebook.com/" class="fa fa-facebook"></a>
                         <a href="https://x.com/login?mx=2" class="fa fa-twitter"></a>
                         <a href="https://www.instagram.com/" class="fa fa-instagram"></a>
                         </div>
 </section>
+    
 
     <footer>
         <p class="first">© 2024 Porsche Polska. Polityka prywatności | Ustawienia plików cookie | System zgłoszeń naruszeń</p>

@@ -10,6 +10,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Strona z samochodami</title>
     <link rel="stylesheet" href="style1.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 
@@ -24,7 +25,7 @@ session_start();
     <div class="modele"><a href="index.php">Modele</a></div>
     <a href="#">Serwis</a>
     <a href="#">Personalizacja</a>
-    <a href="#">Historia</a>
+    <a href="historia.php">O Porsche</a>
     <a href="#">Kontakt</a>
     <div class="login">
         <?php if (isset($_SESSION['user_name'])): ?>
@@ -88,7 +89,7 @@ session_start();
 </section>
 <div class="main2">
     <section class="sekcja2_p_s">
-<img class="img_p1" src="https://i.pinimg.com/originals/c4/95/56/c4955632ad49a3cb996dd19903a1dd11.jpg" alt="" srcset="">
+<img class="img_p1" src="https://www.driving.co.uk/wp-content/uploads/sites/5/2014/06/98440197_Porsche-918-Spyder.jpg" alt="" srcset="">
     
 
             <div class="left_o">
@@ -100,6 +101,14 @@ session_start();
             <div class="left_o">
                 <h2>Wydajność</h2><br><span class="red">Porsche 918 Spyder</span> jest wyjątkowo wydajnym samochodem sportowym, który łączy w sobie moc i efektywność. W porównaniu do swojej poprzedniczki, Porsche Carrera GT, model 918 Spyder oferuje znacznie większą moc silnika V8 o mocy 608 KM. To niespotykane połączenie mocy i precyzji sprawia, że ten samochód ma zupełnie nowe możliwości.</div><img class="img_p2" src="https://p.turbosquid.com/ts-thumb/K2/Si84lj/5x/porsche_918_spyder_06/jpg/1637859117/1920x1080/fit_q87/9a42d2675f7f5dddf38055f7a6bde51bf8604c26/porsche_918_spyder_06.jpg" alt="" srcset=""></div>
     </section>
+    <section class="opor_bottom">
+    <h2>Śledź nas na naszych mediach społecznościowych!</h2>
+                        <div class="icons">
+                        <a href="https://pl-pl.facebook.com/" class="fa fa-facebook"></a>
+                        <a href="https://x.com/login?mx=2" class="fa fa-twitter"></a>
+                        <a href="https://www.instagram.com/" class="fa fa-instagram"></a>
+                        </div>
+</section>
     <footer>
         <p class="first">© 2024 Porsche Polska. Polityka prywatności | Ustawienia plików cookie | System zgłoszeń naruszeń</p>
         <p>Od 1 września 2018 r. wszystkie nowe pojazdy wprowadzane do obrotu w Unii Europejskiej muszą być badane i homologowane zgodnie z procedurą WLTP określoną w rozporządzeniu Komisji (UE) 2017/1151. WLTP zapewnia bardziej rygorystyczne warunki badania i bardziej realistyczne wartości zużycia paliwa i emisji CO2 w porównaniu do stosowanej to tej pory metody NEDC. Prezentowane dane dotyczące wartości zużycia paliwa i emisji CO2 są danymi zgodnymi ze świadectwem homologacji typu wyznaczonymi zgodnie z procedurą WLTP. Więcej informacji na temat WLTP na stronie: porsche.pl/wltp.</p>

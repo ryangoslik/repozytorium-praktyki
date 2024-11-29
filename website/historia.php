@@ -26,7 +26,7 @@ session_start();
     <a href="#">Serwis</a>
     <a href="#">Personalizacja</a>
     <a href="historia.php">O Porsche</a>
-    <a href="kontakt.php">Kontakt</a>
+    <a href="#">Kontakt</a>
     <div class="login">
         <?php if (isset($_SESSION['user_name'])): ?>
             <span>Witaj, <?php echo htmlspecialchars($_SESSION['user_name']); ?>!</span>
@@ -37,93 +37,91 @@ session_start();
         <?php endif; ?>
     </div>
 </nav>
-    <section class="section1">
-        <h2 class="p_s_h2"><a href="spyder.php">PORSCHE 918 SPYDER</a></h2>
-    </section>
-    <div class="container" id="nasze_modele">
-        <h2>Nasze Modele</h2>
-        <div class="car-list">
+<div class="opor_s1">
+<h2>Porsche w Polsce</h2>
+<div class="map_img"><img src="https://porsche.pl/wp-content/themes/porsche/img/mapa_porsche_centrum_polska.jpg" alt="" srcset=""></div>
+</div>
+<h2 class="dane">Dane kontaktowe</h2>
+<hr class="opor_hr">
+<div class="opor_s2">
+ <div class="box_opor"><h3>Porsche Centrum Sopot</h3>
+    <p>Al. Niepodległości 956</p>
+    <p>81-861 Sopot</p>
+    <p>Tel: +48 58 550 911 0</p>
+    <button class="opor_bt">> Zarezerwuj Porsche online</button>
+ </div>
+ <div class="box_opor"><h3>Porsche Centrum Poznań</h3>
+    <p>ul. Warszawska 67</p>
+    <p>61-028 Poznań</p>
+    <p>Tel: +48 61 849 11 00</p>
+    <button class="opor_bt">> Zarezerwuj Porsche online</button>
+ </div>
+ <div class="box_opor"><h3>Porsche Store Warszawa</h3>
+    <p>ul. Połczyńska 107</p>
+    <p>01-303 Warszawa</p>
+    <p>Tel: +48 22 532 41 00</p>
+    <button class="opor_bt">> Zarezerwuj Porsche online</button>
+ </div>
+ <div class="box_opor"><h3>Porsche Centrum Warszawa</h3>
+    <p>ul. Połczyńska 107</p>
+    <p>01-303 Warszawa</p>
+    <p>Tel: +48 22 532 41 00</p>
+    <button class="opor_bt">> Zarezerwuj Porsche online</button>
+ </div>
+ <div class="box_opor"><h3>Porsche Centrum Warszawa Okęcie</h3>
+    <p>ul. Sekundowa 1A</p>
+    <p>02-178 Warszawa</p>
+    <p>Tel: +48 22 48 90 911</p>
+    <button class="opor_bt">> Zarezerwuj Porsche online</button>
+ </div>
+ <div class="box_opor"><h3>Porsche Centrum Wrocław</h3>
+    <p>Al. Karkonoska 54</p>
+    <p>53-015 Wrocław</p>
+    <p>Tel: +48 71 6 911 911</p>
+    <button class="opor_bt">> Zarezerwuj Porsche online</button>
+ </div>
+ <div class="box_opor"><h3>Porsche Centrum Katowice</h3>
+    <p>ul. Kochłowicka 103</p>
+    <p>40-818 Katowice</p>
+    <p>Tel: +48 32 39 911 00</p>
+    <button class="opor_bt">> Zarezerwuj Porsche online</button>
+ </div>
+ <div class="box_opor"><h3>Porsche Centrum Łódź</h3>
+    <p>al. Władysława Bartoszewskiego 15</p>
+    <p>93-341 Łódź</p>
+    <p>Tel: +48 42 20 871 00</p>
+    <button class="opor_bt">> Zarezerwuj Porsche online</button>
+ </div>
+ <div class="box_opor"><h3>Porsche Centrum Kraków</h3>
+    <p>ul. Jasnogórska 109</p>
+    <p>31-358 Kraków</p>
+    <p>+48 12 61 26 911</p>
+    <button class="opor_bt">> Zarezerwuj Porsche online</button>
+ </div>
+ <div class="box_opor"><h3>Porsche Centrum Rzeszów</h3>
+    <p>ul. Lubelska 119</p>
+    <p>35-233 Rzeszów</p>
+    <p>tel.: +48 17 20 08 911</p>
+    <button class="opor_bt">> Zarezerwuj Porsche online</button>
+ </div>
+ <div class="box_opor"><h3>Porsche Centrum Szczecin</h3>
+    <p>ul. Południowa 12</p>
+    <p>71-001 Szczecin</p>
+    <p>tel.: 91 44 39 911</p>
+    <button class="opor_bt">> Zarezerwuj Porsche online</button>
+ </div>
 
-        <div class="car-card"><a href="spyder.php">
-                <div class="car-image">
-                    <img src="https://p.turbosquid.com/ts-thumb/K2/Si84lj/5x/porsche_918_spyder_06/jpg/1637859117/1920x1080/fit_q87/9a42d2675f7f5dddf38055f7a6bde51bf8604c26/porsche_918_spyder_06.jpg" alt="Samochód 1">
-                </div>
-                <div class="car-info">
-                    <h3 class="spyder">918 Spyder</h3>
-                    <p>Rok: 2015</p>
-                    <p>Cena: 1 725 000 EUR (import) </p>
-                    </div></a>
-            </div>
-
-            <div class="car-card"><a href="911.php">
-                <div class="car-image">
-                    <img src="https://files.porsche.com/filestore/image/multimedia/none/911-tus-modelimage-sideshot/model/930894f1-6214-11ea-80c8-005056bbdc38/porsche-model.png" alt="Samochód 1">
-                </div>
-                <div class="car-info">
-                    <h3 class="p911">911 Turbo S</h3>
-                    <p>Rok: 2024</p>
-                    <p>Cena: od 650 400 PLN</p>
-                    </div></a>
-            </div>
-
-            <div class="car-card"><a href="718.php">
-                <div class="car-image">
-                    <img src="https://files.porsche.com/filestore/image/multimedia/none/982-718-c7s-modelimage-sideshot/model/af021b27-d5ba-11ec-80ef-005056bbdc38/porsche-model.png" alt="Samochód 1">
-                </div>
-                <div class="car-info">
-                    <h3 class="p718">718 Cayman S</h3>
-                    <p>Rok: 2024</p>
-                    <p>Cena: od 354 000 PLN</p>
-                    </div></a>
-            </div>
-
-            <div class="car-card"><a href="taycan.php">
-                <div class="car-image">
-                    <img src="https://www.swaggermagazine.com/home/wp-content/uploads/2019/09/porsche-thumbnail-1.png?x96600" alt="Samochód 1">
-                </div>
-                <div class="car-info">
-                    <h3 class="taycan">Taycan Turbo</h3>
-                    <p>Rok: 2024</p>
-                    <p>Cena: od 712 000 PLN</p>
-                    </div></a>
-            </div>
-
-            <div class="car-card"><a href="panamera.php">
-                <div class="car-image">
-                    <img src="https://porsche-vietnam.vn/wp-content/uploads/2024/05/972-g3-v6-modelimage-sideshot.png" alt="Samochód 1">
-                </div>
-                <div class="car-info">
-                    <h3 class="panamera">Panamera Turbo S</h3>
-                    <p>Rok: 2024</p>
-                    <p>Cena: od 897 000 PLN</p>
-                    </div></a>
-            </div>
-
-            <div class="car-card"><a href="cayenne.php">
-                <div class="car-image">
-                    <img src="https://files.porsche.com/filestore/image/multimedia/none/9yb-e3-c-tu-modelimage-sideshot/model/104c07d3-a8d4-11eb-80d5-005056bbdc38/porsche-model.png" alt="Samochód 1">
-                </div>
-                <div class="car-info">
-                    <h3 class="cayenne">Cayenne S</h3>
-                    <p>Rok: 2023</p>
-                    <p>Cena: od 553 000 PLN</p>
-                    </div></a>
-            </div>
-        </div>
-    </div>
-
-    <section class="map">
-    <h2>Salony Porsche w Polsce:</h2>    
-    <img src="https://porsche.pl/wp-content/themes/porsche/img/mapa_porsche_centrum_polska.jpg" alt="" srcset="">
-    <section><hr class="opor_hr">
-    <section class="opor_bottom">
+</div>
+<hr class="opor_hr">
+<section class="opor_bottom">
     <h2>Śledź nas na naszych mediach społecznościowych!</h2>
-                        <div class="icons">
+                    <div class="icons">
                         <a href="https://pl-pl.facebook.com/" class="fa fa-facebook"></a>
                         <a href="https://x.com/login?mx=2" class="fa fa-twitter"></a>
                         <a href="https://www.instagram.com/" class="fa fa-instagram"></a>
                         </div>
 </section>
+    
 
     <footer>
         <p class="first">© 2024 Porsche Polska. Polityka prywatności | Ustawienia plików cookie | System zgłoszeń naruszeń</p>

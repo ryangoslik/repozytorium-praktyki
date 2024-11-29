@@ -10,6 +10,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Strona z samochodami</title>
     <link rel="stylesheet" href="style1.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 
@@ -24,7 +25,7 @@ session_start();
     <div class="modele"><a href="#nasze_modele">Modele</a></div>
     <a href="#">Serwis</a>
     <a href="#">Personalizacja</a>
-    <a href="#">Historia</a>
+    <a href="historia.php">O Porsche</a>
     <a href="#">Kontakt</a>
     <div class="login">
         <?php if (isset($_SESSION['user_name'])): ?>
@@ -78,7 +79,7 @@ session_start();
 </section>
 <div class="main2">
     <section class="sekcja2_p_s">
-<img class="img_p1" src="https://imgd.aeplcdn.com/1280x720/n/4c8j43a_1589771.jpg?q=75" alt="" srcset="">
+<img class="img_p1" src="https://www.hdcarwallpapers.com/download/porsche_718_cayman_gt4_pdk_2020_5k_interior-2560x1440.jpg" alt="" srcset="">
     
 
             <div class="left_o">
@@ -90,6 +91,14 @@ session_start();
             <div class="left_o">
                 <h2>Wydajność</h2><br><span class="red">Porsche 718 Cayman S</span> zasilany turbodoładowanym silnikiem bokser 2.5L o mocy 350 KM, 718 Cayman S osiąga 100 km/h w zaledwie 4,4 sekundy. Precyzyjne prowadzenie, adaptacyjne zawieszenie oraz napęd na tylne koła gwarantują niezwykłą dynamikę jazdy i kontrolę na zakrętach, zapewniając niezapomniane wrażenia za kierownicą.</div><img class="img_p2" src="https://files.porsche.com/filestore/image/multimedia/none/982-718-c7s-modelimage-sideshot/model/af021b27-d5ba-11ec-80ef-005056bbdc38/porsche-model.png" alt="" srcset=""></div>
     </section>
+    <section class="opor_bottom">
+    <h2>Śledź nas na naszych mediach społecznościowych!</h2>
+                        <div class="icons">
+                        <a href="https://pl-pl.facebook.com/" class="fa fa-facebook"></a>
+                        <a href="https://x.com/login?mx=2" class="fa fa-twitter"></a>
+                        <a href="https://www.instagram.com/" class="fa fa-instagram"></a>
+                        </div>
+</section>
     <footer>
         <p class="first">© 2024 Porsche Polska. Polityka prywatności | Ustawienia plików cookie | System zgłoszeń naruszeń</p>
         <p>Od 1 września 2018 r. wszystkie nowe pojazdy wprowadzane do obrotu w Unii Europejskiej muszą być badane i homologowane zgodnie z procedurą WLTP określoną w rozporządzeniu Komisji (UE) 2017/1151. WLTP zapewnia bardziej rygorystyczne warunki badania i bardziej realistyczne wartości zużycia paliwa i emisji CO2 w porównaniu do stosowanej to tej pory metody NEDC. Prezentowane dane dotyczące wartości zużycia paliwa i emisji CO2 są danymi zgodnymi ze świadectwem homologacji typu wyznaczonymi zgodnie z procedurą WLTP. Więcej informacji na temat WLTP na stronie: porsche.pl/wltp.</p>

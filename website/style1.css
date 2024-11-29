@@ -724,7 +724,97 @@ color: black;
 .header_b .panamera{
     font-size: 4rem;
 }
+
+.opor_s1{
+    font-family: orbitron;
+    display: flex;
+    width: 100vw;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+}
+.opor_s1 h2{
+margin-left:-10vw;
+font-size: xx-large;
+}
+.map_img img{
+    width: 100%;
+    height: auto;
+}
+.opor_s2{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 80vw;
+    align-items: center;
+    margin-left: 10vw;
+    margin-right: 10vw;
+    justify-content: center;
+    text-align: center;
+}
+.box_opor{
+    width: 26%;
+    height: 35vh;
+    padding: 2%;
+    font-family: tomorrow;
+    line-height: -1;
+}
+.box_opor p{
+    font-weight: 300;
+}
+.box_opor h3{
+    font-weight: 600;
+}
+.opor_bt{
+ padding: 4%;
+ background-color: #333333;
+ color: whitesmoke;
+ border:0px;
+ box-shadow: 0;
+ transition: 0.15s;
+ border-radius: 2px;
+}
+.opor_bt:hover{
+    padding: 4%;
+    background-color: #cc0000;
+    color: whitesmoke;
+   }
+.dane{
+text-align: center;
+font-size: xx-large;
+font-family: orbitron;
+}
+.opor_hr{
+    width: 70vw;
+}
+.opor_bottom{
+    margin-top: 4vh;
+    font-family: tomorrow;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+}
+.opor_bottom h2{
+    font-family: tomorrow;
+}
+.fa-facebook, .fa-twitter, .fa-instagram{
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #333333;
+    padding: 1%;
+    margin: 1%;
+}
+
+
+
 @media (max-width: 768px) {
+
+    .opor_s1 h2{
+        text-align: center;
+        margin-left: 0;
+        font-size: large;
+        }
+
     nav{
         font-size:small;
         max-width:100vw;
@@ -739,9 +829,16 @@ color: black;
     background-image: url('https://wallpapercrafter.com/desktop/325327-Vehicles-Porsche-911-GT3-Phone-Wallpaper.jpg');
     margin-left: 5vw;
 }
+
 }
 
 @media (max-width: 480px) {
+    .box_opor{
+        width: 100vw;
+        height: 35vh;
+        padding: 2%;
+    }
+
 
     body {
         font-family: Arial, sans-serif;

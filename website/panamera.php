@@ -10,6 +10,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Strona z samochodami</title>
     <link rel="stylesheet" href="style1.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 
@@ -24,7 +25,7 @@ session_start();
     <div class="modele"><a href="index.php">Modele</a></div>
     <a href="#">Serwis</a>
     <a href="#">Personalizacja</a>
-    <a href="#">Historia</a>
+    <a href="historia.php">O Porsche</a>
     <a href="#">Kontakt</a>
     <div class="login">
         <?php if (isset($_SESSION['user_name'])): ?>
@@ -95,6 +96,14 @@ session_start();
             <div class="left_o">
                 <h2>Wydajność</h2><br><span class="red">Porsche Panamera Turbo S</span> Silnik V8 biturbo 4,0 l generuje 761 KM i 1 050 Nm, przyspieszając 0–100 km/h w 3,1 s. Maksymalna prędkość to 315 km/h. Napęd AWD i 8-biegowa skrzynia PDK zapewniają doskonałą trakcję i sportową dynamikę.</div><img class="img_p2" src="https://porsche-vietnam.vn/wp-content/uploads/2024/05/972-g3-v6-modelimage-sideshot.png" alt="" srcset=""></div>
     </section>
+    <section class="opor_bottom">
+    <h2>Śledź nas na naszych mediach społecznościowych!</h2>
+                        <div class="icons">
+                        <a href="https://pl-pl.facebook.com/" class="fa fa-facebook"></a>
+                        <a href="https://x.com/login?mx=2" class="fa fa-twitter"></a>
+                        <a href="https://www.instagram.com/" class="fa fa-instagram"></a>
+                        </div>
+</section>
     <footer>
         <p class="first">© 2024 Porsche Polska. Polityka prywatności | Ustawienia plików cookie | System zgłoszeń naruszeń</p>
         <p>Od 1 września 2018 r. wszystkie nowe pojazdy wprowadzane do obrotu w Unii Europejskiej muszą być badane i homologowane zgodnie z procedurą WLTP określoną w rozporządzeniu Komisji (UE) 2017/1151. WLTP zapewnia bardziej rygorystyczne warunki badania i bardziej realistyczne wartości zużycia paliwa i emisji CO2 w porównaniu do stosowanej to tej pory metody NEDC. Prezentowane dane dotyczące wartości zużycia paliwa i emisji CO2 są danymi zgodnymi ze świadectwem homologacji typu wyznaczonymi zgodnie z procedurą WLTP. Więcej informacji na temat WLTP na stronie: porsche.pl/wltp.</p>

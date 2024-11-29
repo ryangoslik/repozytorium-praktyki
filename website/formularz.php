@@ -64,6 +64,11 @@ session_start();
                         h3:hover{
                         color:#cc0000;
                     }
+                    @media (max-width: 768px) {
+                        .formular {
+                            width: 60vw;
+                        }
+                    }
                     </style>
     <title>Formularz zakupu</title>
 </head>
