@@ -9,7 +9,7 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Strona z samochodami</title>
-    <link rel="stylesheet" href="style1.css">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
@@ -22,11 +22,10 @@ session_start();
 
     
     <nav>
-    <div class="modele"><a href="#nasze_modele">Modele</a></div>
-    <a href="#">Serwis</a>
-    <a href="#">Personalizacja</a>
+    <div class="modele"><a href="index.php#nasze_modele">Modele</a></div>
+    
     <a href="historia.php">O Porsche</a>
-    <a href="#">Kontakt</a>
+    <a href="kontakt.php">Kontakt</a>
     <div class="login">
         <?php if (isset($_SESSION['user_name'])): ?>
             <span>Witaj, <?php echo htmlspecialchars($_SESSION['user_name']); ?>!</span>

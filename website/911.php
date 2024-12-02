@@ -22,11 +22,10 @@ session_start();
 
     
     <nav>
-    <div class="modele"><a href="#nasze_modele">Modele</a></div>
-    <a href="#">Serwis</a>
-    <a href="#">Personalizacja</a>
+    <div class="modele"><a href="index.php#nasze_modele">Modele</a></div>
+    
     <a href="historia.php">O Porsche</a>
-    <a href="#">Kontakt</a>
+    <a href="kontakt.php">Kontakt</a>
     <div class="login">
         <?php if (isset($_SESSION['user_name'])): ?>
             <span>Witaj, <?php echo htmlspecialchars($_SESSION['user_name']); ?>!</span>

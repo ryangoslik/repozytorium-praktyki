@@ -38,6 +38,6 @@ session_start();
 </nav>
 </head>
 <body>
-    <p class="podziekowanie">Dziekujemy za Zakup!</p><br><div class="wroc"><a href="index.php"> Kliknij tutaj aby wrocić</a></div>
+    <p class="podziekowanie">Dziekujemy za wysłanie wiadomosci! Wkrótce się z tobą skontaktujemy!</p><br><div class="wroc"><a href="index.php"> Kliknij tutaj aby wrocić</a></div>
 </body>
 </html>

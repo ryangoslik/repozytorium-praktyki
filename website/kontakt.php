@@ -9,7 +9,7 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Strona z samochodami</title>
-    <link rel="stylesheet" href="style1.css">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
@@ -18,7 +18,8 @@ session_start();
                         justify-content: center;
                         align-items: center;
                         flex-direction: column;
-                        margin: 0;
+                        margin-top: 10vh;
+                        margin-bottom:10vh;
                     }
                     label{
                         margin-left:0vw;
@@ -82,13 +83,12 @@ session_start();
     </header>
    
 
-    
+
     <nav>
-    <div class="modele"><a href="#nasze_modele">Modele</a></div>
-    <a href="#">Serwis</a>
-    <a href="#">Personalizacja</a>
+    <div class="modele"><a href="index.php#nasze_modele">Modele</a></div>
+    
     <a href="historia.php">O Porsche</a>
-    <a href="#">Kontakt</a>
+    <a href="kontakt.php">Kontakt</a>
     <div class="login">
         <?php if (isset($_SESSION['user_name'])): ?>
             <span>Witaj, <?php echo htmlspecialchars($_SESSION['user_name']); ?>!</span>
@@ -99,11 +99,12 @@ session_start();
         <?php endif; ?>
     </div>
 </nav>
-<div class="mains">
+
+<div class="mains"><div class="tytul"><h1>Kontakt</h1></div>
 <div class="formular">
-        <form action="" method="POST">
+        <form action="kontakt_form.php" method="POST">
             <label for="name">Imię i nazwisko:</label><br>
-            <input type="text" id="name" name="name" required><br><br>
+            <input type="text" id="name_surname" name="name_surname" required><br><br>
 
             <label for="email">E-mail:</label><br>
             <input type="email" id="email" name="email" required><br><br>
@@ -112,7 +113,7 @@ session_start();
             <textarea id="mess" name="mess" rows="5" required></textarea><br><br>
 
             <label for="phone">Numer telefonu:</label><br>
-            <input type="tel" id="phone" name="phone" placeholder="000-000-000" pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}" required><br><br>
+            <input type="tel" id="tel" name="tel" placeholder="000-000-000" pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}" required><br><br>
 
             <button type="submit">Wyślij</button>
         </form>

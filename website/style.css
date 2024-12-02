@@ -732,6 +732,7 @@ color: black;
     flex-direction: column;
     flex-wrap: wrap;
     align-content: center;
+    margin-top: 4vh;
 }
 .opor_s1 h2{
 margin-left:-10vw;
@@ -740,6 +741,7 @@ font-size: xx-large;
 .map_img img{
     width: 100%;
     height: auto;
+    margin-bottom: 2vh;
 }
 .opor_s2{
     display: flex;
@@ -804,9 +806,35 @@ font-family: orbitron;
     padding: 1%;
     margin: 1%;
 }
+.podziekowanie{
+    margin-top: 10vh;
+    text-align: center;
+    font-size: 2rem;
+    font-family: tomorrow;
+}
+.wroc{
+    font-size: 1.6rem;
+    font-weight: 500;
+    text-align: center;
+    margin-top: 0.5vh;
+    text-decoration: none;
+    color: black;
+    font-family: tomorrow;
+    
+}
+.wroc a{
+    text-decoration: none;
+    color: black;
+    transition: 0.3s;
+}
+.wroc a:hover{
+    color: #cc0000;
+}
 
-
-
+.tytul h1{
+    text-align: center;
+    font-family: orbitron;
+}
 @media (max-width: 768px) {
 
     .opor_s1 h2{
@@ -844,7 +872,7 @@ font-family: orbitron;
         font-family: Arial, sans-serif;
         margin: 0;
         padding: 0;
-        width: 103vw;
+        width: 100vw;
     }
 
     .video-section {
@@ -858,6 +886,7 @@ font-family: orbitron;
     }
 
     nav {
+        width: 100vw;
         flex-direction: column;
         align-items: center;
         font-size: x-large;

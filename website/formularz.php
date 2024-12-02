@@ -26,6 +26,7 @@ session_start();
                         background-color: #f2f2f2;
                         border-radius: 10px;
                         width: 29%;
+                        margin-top:6vh;
                     }
                     .formular input,
                     .formular textarea {
