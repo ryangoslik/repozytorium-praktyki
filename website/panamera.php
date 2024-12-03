@@ -9,7 +9,7 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Strona z samochodami</title>
-    <link rel="stylesheet" href="style1.css">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
@@ -139,37 +139,7 @@ session_start();
         const isLoggedIn = <?php echo isset($_SESSION['user_name']) ? 'true' : 'false'; ?>;
 
         if (isLoggedIn) {
-            const nowaStrona = window.open('', '_blank');
-            nowaStrona.document.write(`
-                <!DOCTYPE html>
-                <html lang="pl">
-                <head>
-                    <meta charset="UTF-8">
-                    <title>Realizacja zamówienia</title>
-                    <style>
-                    @import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Press+Start+2P&family=Quicksand:wght@300..700&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
-
-                    body {
-                        font-family: 'Quicksand';
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        height: 100vh;
-                        margin: 0;
-                        background-color: rgb(247, 251, 255);
-                        color: black;
-                    }
-                    h1 {
-                        color: black;
-                        text-align: center;
-                    }
-                    </style>
-                </head>
-                <body>
-                    <h1>Przygotowywanie zamówienia!</h1>
-                </body>
-                </html>
-            `);
+            window.location.href = "zakup5.php";
         } else {
             window.location.href = "formularz.php";
         }

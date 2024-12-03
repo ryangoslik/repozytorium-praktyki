@@ -9,7 +9,7 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Strona z samochodami</title>
-    <link rel="stylesheet" href="style1.css">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
@@ -144,35 +144,7 @@ function otworzFormularz() {
         const isLoggedIn = <?php echo isset($_SESSION['user_name']) ? 'true' : 'false'; ?>;
 
         if (isLoggedIn) {
-            const nowaStrona = window.open('', '_blank');
-            nowaStrona.document.write(`
-                <html lang="pl">
-            <head>
-                <meta charset="UTF-8">
-                <title>Realizacja zamówienia</title>
-                <style>
-                @import url('https://fonts.googleapis.com/css2?family=Birthstone&family=Imperial+Script&family=Italianno&family=Mr+Dafoe&family=Orbitron&family=Sriracha&family=Tomorrow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-                    body {
-                        font-family: tomorrow;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        height: 100vh;
-                        margin: 0;
-                        background-color: white;
-                        color: black;
-                    }
-                    h1 {
-                        color: black;
-                        text-align:center;
-                    }
-                </style>
-            </head>
-            <body>
-                <h1>Przygotowywanie zamówienia!<br>Wkrótce skontaktujemy się z Tobą.</h1>
-            </body>
-            </html>
-        `);
+            window.location.href = "zakup1.php";
         } else {
             window.location.href = "formularz.php";
         }

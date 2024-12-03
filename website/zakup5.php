@@ -1,6 +1,8 @@
 <?php
 session_start();
 ?>
+
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -8,36 +10,62 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Strona z samochodami</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-<header class="back"><a href="index.php"><</a></header>
-<div class="logo"></div>
-    <main>
 
-    <section class='formularz'>
-    <header class="header_1">
+    <header>
         <a href="index.php"> <h1>PORSCHE</h1>
         <hr></a>
     </header>
- <form action="login.php" method="post">
-    <input type="text" name="login" placeholder="Login">
-    <br>
-    <input type="password" name="password" placeholder="Hasło">
-    <br>
-    <?php
-    if(isset($_SESSION['e_zal'])){
-        echo'<div class="error1">'.$_SESSION['e_zal'].'</div>';
-        unset($_SESSION['e_zal']);
-    }
-    ?>
-    <button type="submit">Zaloguj się</button>
-    <div class="none"><p> Nie posiadasz konta?<br> <a href="zarejestruj.php" >Zarejestruj tutaj!</a></p></div>
- </form>
-  </section>
-<div class="right"><img src="https://i.pinimg.com/originals/c5/57/c9/c557c9d6fd4b25dbc8e9992a045d0dd4.jpg" alt="" srcset=""></div>
-    </main>
+   
 
     
+    <nav>
+    <div class="modele"><a href="#nasze_modele">Modele</a></div>
+    
+    <a href="historia.php">O Porsche</a>
+    <a href="kontakt.php">Kontakt</a>
+    <div class="login">
+        <?php if (isset($_SESSION['user_name'])): ?>
+            <span>Witaj, <?php echo htmlspecialchars($_SESSION['user_name']); ?>!</span>
+            <a href="logout.php">Wyloguj</a>
+        <?php else: ?>
+            <a href="zarejestruj.php">Zarejestruj</a> 
+            <a href="zaloguj.php">Zaloguj</a>
+        <?php endif; ?>
+    </div>
+</nav>
+    <div class="container" id="nasze_modele">
+        <h2>Zakup:</h2>
+        <div class="car-list">
+
+        <div class="car-card"><a href="panamera.php">
+                <div class="car-image">
+                    <img src="https://porsche-vietnam.vn/wp-content/uploads/2024/05/972-g3-v6-modelimage-sideshot.png" alt="Samochód 1">
+                </div>
+                <div class="car-info">
+                    <h3 class="panamera">Panamera Turbo S</h3>
+                    <p>Rok: 2024</p>
+                    <p>Cena: od 897 000 PLN</p>
+                    </div></a><div class="burton"><button class="zakup" onclick="">Przejdź do zakupu</button></div>
+            </div>
+            
+           
+
+            
+            
+        </div>
+    </div>
+
+    <section class="opor_bottom">
+    <h2>Śledź nas na naszych mediach społecznościowych!</h2>
+                        <div class="icons">
+                        <a href="https://pl-pl.facebook.com/" class="fa fa-facebook"></a>
+                        <a href="https://x.com/login?mx=2" class="fa fa-twitter"></a>
+                        <a href="https://www.instagram.com/" class="fa fa-instagram"></a>
+                        </div>
+</section>
 
     <footer>
         <p class="first">© 2024 Porsche Polska. Polityka prywatności | Ustawienia plików cookie | System zgłoszeń naruszeń</p>
