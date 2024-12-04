@@ -1,10 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['user_name'])) {
-    $_SESSION['last_page'] = $_SERVER['REQUEST_URI'];
-    header("Location: zaloguj.php");
-    exit();
-}
+
 ?>
 
 <!DOCTYPE html>
@@ -96,7 +92,7 @@ if (!isset($_SESSION['user_name'])) {
 
             <button type="submit">Wyślij</button>
         </form>
-        <a href="zaloguj.php"><h3>Posiadasz konto? Zaloguj się tutaj.</h3></a>
+        <a href="zaloguj1.php"><h3>Posiadasz konto? Zaloguj się tutaj.</h3></a>
     </div>
     
 </body>

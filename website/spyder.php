@@ -146,7 +146,7 @@ function otworzFormularz() {
         if (isLoggedIn) {
             window.location.href = "zakup1.php";
         } else {
-            window.location.href = "formularz.php";
+            window.location.href = "formularz1.php";
         }
     }
 </script>
