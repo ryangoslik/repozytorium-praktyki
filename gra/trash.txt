@@ -1,0 +1,139 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <cstdlib>
+
+struct Player {
+    std::string name;
+    std::string unit;
+    int health;
+    int ammo;
+    int clip;
+    int atgrenades;
+    int apgrenades;
+};
+
+// Funkcja do wyswietlania wprowadzenia i tworzenia postaci
+Player createCharacter() {
+    Player player;
+    std::cout << "=== Tworzenie postaci ===\n";
+    std::cout << "Podaj swoje imie: ";
+    std::cin >> player.name;
+
+    std::cout << "Wybierz jednostke:\n";
+    std::cout << "1. Zaloga czolgu M26 Pershing (USA)\n";
+    std::cout << "2. Komandos SAS (Brytyjsko-Polski partyzant)\n";
+    int choice;
+    std::cin >> choice;
+
+    if (choice == 1) {
+        player.unit = "Dzialonowy czolgu M26 Pershing, posiadasz: 2 granaty odlamkowe, 1 granat przeciwczolgowy oraz colta m1911 z czterema magazynkami";
+        player.health = 100;
+        player.ammo = 32;
+        player.clip = 8;
+        player.atgrenades = 1;
+        player.apgrenades = 2;
+    }
+    else if (choice == 2) {
+        player.unit = "Komandos SAS";
+        player.health = 100;
+        player.ammo = 30;
+        player.apgrenades = 3;
+    }
+    else {
+        std::cout << "Nieprawidlowy wybor. Ustawiono domyslnie czolgiste.\n";
+        player.unit = "Dzialonowy czolgu M26 Pershing, posiadasz: 2 granaty odlamkowe, 1 granat przeciwczolgowy oraz colta m1911 z czterema magazynkami";
+        player.health = 100;
+        player.ammo = 32;
+        player.clip = 8;
+        player.atgrenades = 1;
+        player.apgrenades = 2;
+    }
+
+    std::cout << "Witaj, " << player.name << "! Wybrales jednostke: " << player.unit << ".\n";
+    return player;
+}
+
+// Funkcja fabularna dla zalogi czolgu
+void tankPrologue(Player& player) {
+    std::cout << "\n=== Prolog: " << player.unit << " ===\n";
+    std::cout << "Jest rok 1945. Jestes dzialonowym czolgu Pershing, nowego czolgu wielskiej armii USA! Twoim zadaniem jest obsluga dziala kalibru 90mm ktore moze czynic cuda i przebic kazdy czolg, ktory stanie ci na drodze do Berlina\n";
+    std::cout << "Byles najlepszym dzialonowym w osrodku dla nowych rekrotow, nie wybrano ci bez powodu tej maszyny,\n";
+    std::cout << "2. Wycofaj sie i poszukaj wsparcia.\n";
+    std::cout << "3. Zaatakuj niemiecki czolg za pomoca granatu.\n";
+
+    int choice;
+    std::cin >> choice;
+
+    if (choice == 1) {
+        std::cout << "Twoj atak byl zbyt odwazny. Wrogowie cie dostrzegli i otworzyli ogien. Straciles 20 zdrowia.\n";
+        player.health -= 20;
+    }
+    else if (choice == 2) {
+        std::cout << "Udalo ci sie znalezc wsparcie. Twoja druzyna zdobyla amunicje.\n";
+        player.ammo += 20;
+    }
+    else if (choice == 3) {
+        std::cout << "Uzyles granatu i zniszczyles czolg wroga, ale straciles granat.\n";
+        player.grenades -= 1;
+    }
+    else {
+        std::cout << "Nie podjeto decyzji. Wrog cie zaskoczyl. Zginales.\n";
+        player.health = 0;
+    }
+}
+
+// Funkcja fabularna dla komandosa
+void sasPrologue(Player& player) {
+    std::cout << "\n=== Prolog: " << player.unit << " ===\n";
+    std::cout << "Jest rok 1950. Nazistowskie Niemcy rzadza swiatem. Jestes partyzantem walczacym o wolnosc Europy.\n";
+
+    std::cout << "1. Zaatakuj konwoj nazistow.\n";
+    std::cout << "2. Przemykaj sie przez wrogie linie.\n";
+    std::cout << "3. Skorzystaj z ukrytego schronienia, by przygotowac zasadzke.\n";
+
+    int choice;
+    std::cin >> choice;
+
+    if (choice == 1) {
+        std::cout << "Udalo ci sie zniszczyc konwoj, ale zostales ranny. Straciles 30 zdrowia.\n";
+        player.health -= 30;
+    }
+    else if (choice == 2) {
+        std::cout << "Dzieki sprytowi uniknales walki. Zyskales czas na uzupelnienie zapasow.\n";
+        player.ammo += 10;
+        player.grenades += 1;
+    }
+    else if (choice == 3) {
+        std::cout << "Przygotowales zasadzke i zabiles kilku wrogow bez strat wlasnych.\n";
+    }
+    else {
+        std::cout << "Brak decyzji spowodowal odkrycie twojej pozycji. Zginales.\n";
+        player.health = 0;
+    }
+}
+
+// Glowna petla gry
+void playGame() {
+    Player player = createCharacter();
+
+    if (player.unit == "Zaloga czolgu M24 Pershing") {
+        tankPrologue(player);
+    }
+    else if (player.unit == "Komandos SAS") {
+        sasPrologue(player);
+    }
+
+    if (player.health > 0) {
+        std::cout << "\n=== Twoja przygoda trwa dalej! ===\n";
+    }
+    else {
+        std::cout << "\n=== Gra skonczona. Zginales. ===\n";
+    }
+}
+
+int main() {
+    std::cout << "=== Witaj w grze fabularnej ===\n";
+    playGame();
+    return 0;
+}
