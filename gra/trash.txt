@@ -2,18 +2,77 @@
 #include <string>
 #include <vector>
 #include <cstdlib>
+#include <thread> // Dla sleep_for
+#include <chrono> // Dla chrono::seconds
+
+using namespace std;
+
+struct Tank {
+    std::string model;     // Model czołgu
+    int ammoAP;            // Amunicja przeciwpancerna
+    int ammoHE;            // Amunicja wybuchowa
+    int ammoHVAP;          // Amunicja wysokoprędkościowa
+
+    void reloadAmmo(int ap, int he, int hvap) {
+        ammoAP += ap;
+        ammoHE += he;
+        ammoHVAP += hvap;
+        std::cout << "Zaladowano amunicje: +" << ap << " AP, +" << he << " HE, +" << hvap << " HVAP.\n";
+    }
+
+    void fire(std::string ammoType) {
+        if (ammoType == "AP") {
+            if (ammoAP > 0) {
+                ammoAP--;
+                std::cout << "Wystrzelono pocisk AP! Pozostalo: " << ammoAP << " AP.\n";
+            }
+            else {
+                std::cout << "Brak amunicji AP!\n";
+            }
+        }
+        else if (ammoType == "HE") {
+            if (ammoHE > 0) {
+                ammoHE--;
+                std::cout << "Wystrzelono pocisk HE! Pozostalo: " << ammoHE << " HE.\n";
+            }
+            else {
+                std::cout << "Brak amunicji HE!\n";
+            }
+        }
+        else if (ammoType == "HVAP") {
+            if (ammoHVAP > 0) {
+                ammoHVAP--;
+                std::cout << "Wystrzelono pocisk HVAP! Pozostalo: " << ammoHVAP << " HVAP.\n";
+            }
+            else {
+                std::cout << "Brak amunicji HVAP!\n";
+            }
+        }
+        else {
+            std::cout << "Nieznany typ amunicji!\n";
+        }
+    }
+
+    void displayAmmo() const {
+        std::cout << "Stan amunicji:\n";
+        std::cout << "Przeciw czolgowy                    AP: " << ammoAP << "\n";
+        std::cout << "Przeciw piechoty                    HE: " << ammoHE << "\n";
+        std::cout << "Przeciw mocniej opancerzonym celom  HVAP: " << ammoHVAP << "\n";
+    }
+};
 
 struct Player {
     std::string name;
     std::string unit;
     int health;
-    int ammo;
-    int clip;
-    int atgrenades;
-    int apgrenades;
+    Tank tank; // Dodano czołg jako część gracza
+    int ammo;            // Amunicja do broni osobistej
+    int clip;            // Magazynki
+    int atgrenades;      // Granaty przeciwczołgowe
+    int apgrenades;      // Granaty odłamkowe
 };
 
-// Funkcja do wyswietlania wprowadzenia i tworzenia postaci
+// Funkcja do tworzenia postaci
 Player createCharacter() {
     Player player;
     std::cout << "=== Tworzenie postaci ===\n";
@@ -21,114 +80,254 @@ Player createCharacter() {
     std::cin >> player.name;
 
     std::cout << "Wybierz jednostke:\n";
-    std::cout << "1. Zaloga czolgu M26 Pershing (USA)\n";
+    std::cout << "1. Dzialonowy czolgu T26 Pershing (USA)\n";
     std::cout << "2. Komandos SAS (Brytyjsko-Polski partyzant)\n";
     int choice;
     std::cin >> choice;
 
     if (choice == 1) {
-        player.unit = "Dzialonowy czolgu M26 Pershing, posiadasz: 2 granaty odlamkowe, 1 granat przeciwczolgowy oraz colta m1911 z czterema magazynkami";
+        player.unit = "Dzialonowy czolgu T26 Pershing";
         player.health = 100;
         player.ammo = 32;
         player.clip = 8;
         player.atgrenades = 1;
         player.apgrenades = 2;
+        player.tank = { "T26 Pershing", 4, 5, 2 }; // Startowa ilość amunicji do czołgu
     }
     else if (choice == 2) {
         player.unit = "Komandos SAS";
         player.health = 100;
         player.ammo = 30;
         player.apgrenades = 3;
+        player.tank = { "Brak czołgu", 0, 0, 0 }; // Brak czołgu dla komandosa
     }
     else {
         std::cout << "Nieprawidlowy wybor. Ustawiono domyslnie czolgiste.\n";
-        player.unit = "Dzialonowy czolgu M26 Pershing, posiadasz: 2 granaty odlamkowe, 1 granat przeciwczolgowy oraz colta m1911 z czterema magazynkami";
+        player.unit = "Dzialonowy czolgu T26 Pershing";
         player.health = 100;
         player.ammo = 32;
         player.clip = 8;
         player.atgrenades = 1;
         player.apgrenades = 2;
+        player.tank = { "T26 Pershing", 4, 5, 2 };
     }
 
     std::cout << "Witaj, " << player.name << "! Wybrales jednostke: " << player.unit << ".\n";
     return player;
 }
 
-// Funkcja fabularna dla zalogi czolgu
+// Funkcja do stopniowego wyświetlania tekstu
+void typeWriterEffect(const std::string& text, int delayMs = 50) {
+    for (char c : text) {
+        std::cout << c;
+        std::this_thread::sleep_for(std::chrono::milliseconds(delayMs));
+    }
+    std::cout << std::endl;
+}
+
+// Funkcja fabularna dla załogi czołgu
 void tankPrologue(Player& player) {
-    std::cout << "\n=== Prolog: " << player.unit << " ===\n";
-    std::cout << "Jest rok 1945. Jestes dzialonowym czolgu Pershing, nowego czolgu wielskiej armii USA! Twoim zadaniem jest obsluga dziala kalibru 90mm ktore moze czynic cuda i przebic kazdy czolg, ktory stanie ci na drodze do Berlina\n";
-    std::cout << "Byles najlepszym dzialonowym w osrodku dla nowych rekrotow, nie wybrano ci bez powodu tej maszyny,\n";
-    std::cout << "2. Wycofaj sie i poszukaj wsparcia.\n";
-    std::cout << "3. Zaatakuj niemiecki czolg za pomoca granatu.\n";
+    typeWriterEffect("\n=== Prolog: " + player.unit + " ===");
+    typeWriterEffect("Jest rok 1945. Jestes dzialonowym czolgu Pershing, nowego czolgu wielkiej armii USA! \nTwoim zadaniem jest obsluga dziala kalibru 90mm ktore moze czynic cuda i przebic kazdy czolg, ktory stanie ci na drodze do Berlina...");
+    typeWriterEffect("Jestes teraz w Koloni 585km od Berlina, miasto pelnych nazistow, ktorzy uciekaja do Berlina aby wprowadzic defensywe...");
+    typeWriterEffect("Ty jak i zaloga musicie byc czujni, jest pelno zasadzek pozostawionych przez ich armie...");
+    typeWriterEffect("Poznaj swoja zaloge, teraz juz braci na ktorych bedziesz polegac i oni na tobie...");
+    typeWriterEffect("Dowodca Robert Early, to on decyduje i dba o was wszytskich, sluchaj sie jego rozkazow a wszytsko bedzie dobrze i bezpiecznie wrocisz do ojczyzny\n Ladowniczy Mike Stakowsky, doswiadczony ladowniczy, juz byl na tym stanowisku w przeszlosci w czolgu srednim M4A3E8 HVSS tzw. Easy Eight.\n To on slucha sie dzialonowego, ktory rodzaj pocisku ma zaladowac do zamka dziala.\n Kierowca John Kurt, przed wojna prowadzil ciezarkowki, teraz znalazl sie w 46 tonowej maszynie.\n Jeden z najlepszych kierowcow jakich mogles dostac.\n Operator karabinu maszynowego Brad Smith, swiezy rekrut, zaledwie ukonczyl 18 lat,\n obiecales mu, ze wroci do domu bezpiecznie, wiec niech ta obietnica sie spelni.\n Oraz ty, dzialonowy dziala. Oni polegaja na tobie, nie mozesz popelnic zadnego bledu,\n bo moze kosztowac cie to twoje jak i zycie twojej zalogi!\n");
 
+    player.tank.displayAmmo();
+    typeWriterEffect("Aktualizowanie histori...");
+    typeWriterEffect("Kierowca stoj! - Padl rozkaz Early'iego");
+    typeWriterEffect(player.name + " na drugiej jest Pantera!");
+    typeWriterEffect("Widze ja! - Powiedzialem");
+    typeWriterEffect("!1. Rozkaz zaladowanie pocisku AP i strzel!");
+    typeWriterEffect("2. Rozkaz zaladowanie pocisku HE i strzel");
+    typeWriterEffect("3. Nie podejmuj zadnej akcji...");
+
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     int choice;
     std::cin >> choice;
 
     if (choice == 1) {
-        std::cout << "Twoj atak byl zbyt odwazny. Wrogowie cie dostrzegli i otworzyli ogien. Straciles 20 zdrowia.\n";
-        player.health -= 20;
+        player.tank.fire("AP");
+        typeWriterEffect("Pantera zniszczona!");
     }
     else if (choice == 2) {
-        std::cout << "Udalo ci sie znalezc wsparcie. Twoja druzyna zdobyla amunicje.\n";
-        player.ammo += 20;
-    }
-    else if (choice == 3) {
-        std::cout << "Uzyles granatu i zniszczyles czolg wroga, ale straciles granat.\n";
-        player.grenades -= 1;
-    }
-    else {
-        std::cout << "Nie podjeto decyzji. Wrog cie zaskoczyl. Zginales.\n";
+        player.tank.fire("HE");
+        typeWriterEffect("Zaloga pantery dostala chwilowego szoku ale po chwili wystrzelili pocisk w bok waszego pojazdu...");
         player.health = 0;
     }
+    else if (choice == 3) {
+        typeWriterEffect("Na co ty czekasz " + player.name + "?! Boze nie!!!");
+        typeWriterEffect("Zostaliscie trafieni w bok od Pantery...");
+        player.health = 0;
+    }
+    else {
+        typeWriterEffect("Decyzja nie zostala podjeta na czas...");
+        player.health = 0;
+    }
+
+
+    if (player.health > 0) {
+        typeWriterEffect("Aktualizowanie histori...");
+        typeWriterEffect("Boze " + player.name + " bylo blisko! kazdy ma miec oczy otwarte! Pelno tu ukrywajacych sie szkopow. - Powiedzial Early.");
+        typeWriterEffect("Tak jest! - odparlismy");
+        typeWriterEffect("Na 11 gniazdo km'u i Panzerfaust w oknie na 1 pietrze!! - krzyknal ze strachem w glosie John.");
+        typeWriterEffect(player.name + " dawajcie im przeciw piechotnym! wyploszymy ich z tamtad!");
+        typeWriterEffect("1. Potwierdz zaladowanie pocisku HE i strzel w filar podtrzymujacy zruinowany budynek");
+        typeWriterEffect("2. Potwierdz zaladowanie pocisku HE i strzel w okno");
+        typeWriterEffect("3. Urzyj sprezonego km-u z wiezy czolgu i strzelaj w stanowsiko wroga");
+        typeWriterEffect("4. Nie podejmuj zadnej decyzji");
+
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        int choice;
+        std::cin >> choice;
+
+
+
+        if (choice == 1) {
+            player.tank.fire("HE");
+            typeWriterEffect("Budynek sie zawala! Dobra robota!");
+        }
+        else if (choice == 2) {
+            player.tank.fire("HE");
+            typeWriterEffect("Trafienie! Przeciwnik unieszkodliwiony!");
+        }
+        else if (choice == 3) {
+            typeWriterEffect("Gniazdo unieszkodliwone!\n");
+            typeWriterEffect("Panzerfaust z drugiego okna uwaga!!!\n");
+            typeWriterEffect("*Zostaliscie trafieni w kadlub z panzerfausta*\n");
+            typeWriterEffect("Niech to szlag trafili Brada!!! - Krzyknal kierowca\n");
+            typeWriterEffect(player.name + " dlaczego nie strzeliles z dziala!? - Zapytal sie mnie Robert");
+            player.health = 85;
+        }
+        else if(choice == 4){
+            typeWriterEffect("Na co ty czekasz " + player.name + "?! Ognia!!!\n");
+            typeWriterEffect("*Zostaliscie trafieni w kadlub z panzerfausta*\n");
+            typeWriterEffect("Niech to szlag trafili Brada!!! - Krzyknal kierowca\n");
+            typeWriterEffect(player.name + " dlaczego nie strzeliles!? - Zapytal sie mnie Robert");
+            player.health = 85;
+        }
+        else {
+            typeWriterEffect("Decyzja nie zostala podjeta na czas...");
+            player.health = 0;
+        }
+    }
+    if (player.health = 100) {
+        typeWriterEffect("Aktualizowanie histori...");
+        typeWriterEffect("Dobra robota " + player.name + "!  \nJohn ruszajmy w droge z nasza 3 dywizja pancerna! - Powiedzial Early ");
+        typeWriterEffect("Robi sie! - Krzyknal kierowca");
+        typeWriterEffect("*Podazalismy w strone Berlina, cala 3 Dywizja Pancerna i 1. Armia Amerykanska, to oni spotkali sie jako pierwsi z armia radziecka\n w miescie gdzie mielismy sie zatrzymac.* ");
+        typeWriterEffect("*Dowiedzielismy sie ze tylko komunisci przeprowadza atak na Berlin. Boze tyle drogi za nami i nawet nie mozemy sami zniszczyc gniazda tych szerszeni???\n*");
+        typeWriterEffect("*Chociaz wyzwolilismy inne miasta, takie jak Kolonia. Robi sie coraz zimniej, ta wojna sie przeciaga i to przez tych komuchow!\n*");
+        typeWriterEffect("*Gdybysmy tylko mogli byc teraz w Berlinie... Rzesza padla by po niecalym miesiacu walki!\n Ale nie, ten egoistyczny komuch Stalin mysli ze zmobilizuje wschodnia Europe i mysli zwyciezy.*");
+        typeWriterEffect("Mamy jeszcze 13 kilometrow do Torgau, w miescie gdzie 1. Armia Amerykanska juz powina tak stacjonowac z Ruskami\n" );
+        typeWriterEffect("4. ");
+
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        int choice;
+        std::cin >> choice;
+
+
+
+        if (choice == 1) {
+            player.tank.fire("HE");
+            typeWriterEffect("Budynek sie zawala! Dobra robota!");
+        }
+        else if (choice == 2) {
+            player.tank.fire("HE");
+            typeWriterEffect("Trafienie! Przeciwnik unieszkodliwiony!");
+        }
+        else if (choice == 3) {
+            typeWriterEffect("Gniazdo unieszkodliwone!\n");
+            typeWriterEffect("Panzerfaust z drugiego okna uwaga!!!\n");
+            typeWriterEffect("*Zostaliscie trafieni w kadlub z panzerfausta*\n");
+            typeWriterEffect("Niech to szlag trafili Brada!!! - Krzyknal kierowca\n");
+            typeWriterEffect(player.name + " dlaczego nie strzeliles z dziala!? - Zapytal sie mnie Robert");
+            player.health = 85;
+        }
+        else if (choice == 4) {
+            typeWriterEffect("Na co ty czekasz " + player.name + "?! Ognia!!!\n");
+            typeWriterEffect("*Zostaliscie trafieni w kadlub z panzerfausta*\n");
+            typeWriterEffect("Niech to szlag trafili Brada!!! - Krzyknal kierowca\n");
+            typeWriterEffect(player.name + " dlaczego nie strzeliles!? - Zapytal sie mnie Robert");
+            player.health = 85;
+        }
+        else {
+            typeWriterEffect("Decyzja nie zostala podjeta na czas...");
+            player.health = 0;
+        }
+    }
+
 }
 
-// Funkcja fabularna dla komandosa
 void sasPrologue(Player& player) {
-    std::cout << "\n=== Prolog: " << player.unit << " ===\n";
-    std::cout << "Jest rok 1950. Nazistowskie Niemcy rzadza swiatem. Jestes partyzantem walczacym o wolnosc Europy.\n";
+    typeWriterEffect("\n=== Prolog: " + player.unit + " ===");
+    typeWriterEffect("Jest rok 1944. II wojna swiatowa wkracza w decydujaca faze.\n");
+    typeWriterEffect("Alianci odkryli, ze Niemcy probuja wznowic produkcje ciezkiej wody w fabryce w Norwegii, co moze przyspieszyc ich program nuklearny.\n");
+    typeWriterEffect("Twoim zadaniem jest zniszczenie fabryki ciezkiej wody w miejscowosci Vemork.\n");
+    typeWriterEffect("Jestes czescia elitarnego oddzialu SAS dowodzonego przez kapitana Jamesa 'Hawka' Hawkinsa.\n");
+    typeWriterEffect("Razem z czterema innymi komandosami zostales zrzucony z samolotu nad gorskimi terenami Norwegii.\n");
 
-    std::cout << "1. Zaatakuj konwoj nazistow.\n";
-    std::cout << "2. Przemykaj sie przez wrogie linie.\n";
-    std::cout << "3. Skorzystaj z ukrytego schronienia, by przygotowac zasadzke.\n";
+    typeWriterEffect("Ladowanie bylo trudne. Sniezna burza utrudnia widocznosc, a zimny wiatr sprawia, ze twoje rece dretwieja.\n");
+    typeWriterEffect("Oddzial gromadzi sie na zbiorce. Kapitan Hawkins daje rozkaz:\n");
 
+    typeWriterEffect("1. Zblizcie sie do fabryki od strony lasu, unikajac patroli.\n");
+    typeWriterEffect("2. Zaatakujcie niemiecki patrol i przejmijcie ich mundury.\n");
+
+    std::cin.get();
     int choice;
     std::cin >> choice;
 
     if (choice == 1) {
-        std::cout << "Udalo ci sie zniszczyc konwoj, ale zostales ranny. Straciles 30 zdrowia.\n";
-        player.health -= 30;
+        typeWriterEffect("Decydujecie sie podejsc od strony lasu. Mrozne powietrze i gesty snieg utrudniaja poruszanie sie, ale pozostajecie niewykryci.\n");
+        typeWriterEffect("Docieracie do punktu obserwacyjnego na skraju lasu, skad widac fabryke. Kapitan Hawkins wydaje kolejne rozkazy:\n");
+
+        typeWriterEffect("1. Zdetonujcie linie energetyczna prowadzaca do fabryki, aby wylaczyc zasilanie.\n");
+        typeWriterEffect("2. Skierujcie sie do glownego wejscia i zaatakujcie bezposrednio.\n");
+
+        std::cin >> choice;
+
+        if (choice == 1) {
+            typeWriterEffect("Zakladasz ladunki wybuchowe na linii energetycznej. Eksplozja wylacza prad w fabryce, powodujac chaos.\n");
+            typeWriterEffect("Oddzial wykorzystuje zamieszanie, aby dostac sie do srodka. Po krotkiej walce neutralizujecie straznikow i przygotowujecie ladunki wybuchowe w glownej hali produkcyjnej.\n");
+            typeWriterEffect("Fabryka zostaje zniszczona! Oddzial wycofuje sie w kierunku miejsca ewakuacji, ale niemiecki poscig zmusza was do podjecia walki w lesie...\n");
+        }
+        else if (choice == 2) {
+            typeWriterEffect("Decydujecie sie na frontalny atak. Niestety, Niemcy otwieraja ogien z wiez strazniczych.\n");
+            typeWriterEffect("Wymiana ognia jest intensywna, a oddzial ponosi straty. Udaje wam sie dotrzec do hali produkcyjnej, ale ciezko ranni musicie wycofac sie, zanim zakonczycie misje.\n");
+            player.health -= 50;
+        }
+        else {
+            typeWriterEffect("Brak decyzji powoduje, ze zostajecie wykryci przez niemieckie patrole. Misja konczy sie niepowodzeniem...\n");
+            player.health = 0;
+        }
     }
     else if (choice == 2) {
-        std::cout << "Dzieki sprytowi uniknales walki. Zyskales czas na uzupelnienie zapasow.\n";
-        player.ammo += 10;
-        player.grenades += 1;
-    }
-    else if (choice == 3) {
-        std::cout << "Przygotowales zasadzke i zabiles kilku wrogow bez strat wlasnych.\n";
+       
     }
     else {
-        std::cout << "Brak decyzji spowodowal odkrycie twojej pozycji. Zginales.\n";
+        typeWriterEffect("Brak decyzji powoduje, ze zostajecie wykryci przez niemieckie patrole. Misja konczy sie niepowodzeniem...\n");
         player.health = 0;
     }
 }
 
-// Glowna petla gry
+
+
 void playGame() {
     Player player = createCharacter();
 
-    if (player.unit == "Zaloga czolgu M24 Pershing") {
+    if (player.unit == "Dzialonowy czolgu T26 Pershing") {
         tankPrologue(player);
     }
-    else if (player.unit == "Komandos SAS") {
-        sasPrologue(player);
+    if (player.unit == "Komandos SAS") {
+        sasPrologue(player);  // Zaktualizowana wersja SAS
     }
 
     if (player.health > 0) {
-        std::cout << "\n=== Twoja przygoda trwa dalej! ===\n";
+        typeWriterEffect("\n=== Twoja przygoda trwa dalej! ===");
     }
     else {
-        std::cout << "\n=== Gra skonczona. Zginales. ===\n";
+        typeWriterEffect("\n=== Tak wygladaly twoje ostatnie chwile... ===");
     }
 }
 
