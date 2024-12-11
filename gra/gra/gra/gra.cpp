@@ -99,6 +99,8 @@ struct Player {
     int lightAttackDamage;
     int heavyAttackDamage;
     int defenseValue;
+    int granadeAttack;
+    int sturmgewehrAttack;
 };
 
 struct Enemy {
@@ -106,7 +108,7 @@ struct Enemy {
     int attackDamage;
 };
 
-void battle(Player& player, Enemy& enemy) {
+void battle1(Player& player, Enemy& enemy) {
     srand(time(0));
     while (player.health > 0 && enemy.health > 0) {
         int choice;
@@ -163,6 +165,79 @@ void battle(Player& player, Enemy& enemy) {
     }
 }
 
+void battle(Player& player, Enemy& enemy) {
+    srand(time(0));
+    while (player.health > 0 && enemy.health > 0) {
+        int choice;
+        typeWriterEffect("\nWybierz akcje:");
+        typeWriterEffect("1. Lekki atak wrecz");
+        typeWriterEffect("2. Ciezki atak wrecz");
+        typeWriterEffect("3. Obrona");
+        typeWriterEffect("4. Rzuc granat");
+        typeWriterEffect("5. Strzelaj z karabinu");
+        cout << "Twoj wybor: ";
+        cin >> choice;
+
+        if (choice == 1) {
+            // Lekki atak
+            int damage = player.lightAttackDamage;
+            enemy.health -= damage;
+            typeWriterEffect("Zadales " + to_string(damage) + " obrazen przeciwnikowi!");
+        }
+        else if (choice == 2) {
+            // Ciezki atak
+            int damage = player.heavyAttackDamage;
+            enemy.health -= damage;
+            typeWriterEffect("Zadales " + to_string(damage) + " obrazen przeciwnikowi!");
+        }
+        else if (choice == 3) {
+            // Obrona
+            int reducedDamage = max(0, enemy.attackDamage - player.defenseValue);
+            player.health -= reducedDamage;
+            typeWriterEffect("Bronisz sie, otrzymujesz " + to_string(reducedDamage) + " obrazen!");
+            continue; // Przeciwnik nie dostaje obrazen, gracz sie tylko broni
+        }
+        else if (choice == 4){
+            int damage = player.granadeAttack;
+            enemy.health -= damage;
+            typeWriterEffect("Zadales " + to_string(damage) + " obrazen przeciwnikowi!");
+            player.apgrenades -= 1;
+            cout << "Pozostalo: " << player.apgrenades << " granatow" << endl;
+        }
+        else if (choice == 5) {
+            int damage = player.sturmgewehrAttack;
+            enemy.health -= damage;
+            typeWriterEffect("Zadales " + to_string(damage) + " obrazen przeciwnikowi!");
+            player.ammo -= 8;
+            cout << "Pozostalo: " << player.ammo << "amunicji i " << player.clip << "magazynek/ow" << endl;
+
+        }else{
+            typeWriterEffect("Nieprawidlowy wybor, tracisz ruch!");
+        }
+        
+        // Sprawdz stan przeciwnika
+        if (enemy.health <= 0) {
+            typeWriterEffect("Pokonales przeciwnika!");
+            break;
+        }
+
+        // Atak przeciwnika
+        int enemyDamage = enemy.attackDamage;
+        player.health -= enemyDamage;
+        typeWriterEffect("Przeciwnik atakuje, otrzymujesz " + to_string(enemyDamage) + " obrazen!");
+
+        // Sprawdz stan gracza
+        if (player.health <= 0) {
+            typeWriterEffect("Zostales pokonany!");
+            break;
+        }
+
+        // Wyswietl aktualny stan zdrowia
+        typeWriterEffect("Twoje zdrowie: " + to_string(player.health));
+        typeWriterEffect("Zdrowie przeciwnika: " + to_string(enemy.health));
+    }
+}
+
 // Funkcja do tworzenia postaci
 Player createCharacter() {
     Player player;
@@ -181,6 +256,8 @@ Player createCharacter() {
         player.health = 100;
         player.heavyAttackDamage = 60;
         player.lightAttackDamage = 25;
+        player.granadeAttack = 200;
+        player.sturmgewehrAttack = 80;
         player.defenseValue = 25;
         player.ammo = 32;
         player.clip = 8;
@@ -418,6 +495,65 @@ void tankPrologue(Player& player) {
             }
 
         }
+        else if (choice == 2) {
+            typeWriterEffect("*Dodano m1945 Thomson 9mm i 2 magazynki (56 pociskow) do ekwipunku!*");
+            typeWriterEffect("*Dodano 2 granaty at!*");
+            player.atgrenades += 2;
+            player.clip = 2;
+            player.ammo = 56;
+            typeWriterEffect("Dobra oto plan, "+player.name+ " z Bradem pojdziecie podlozyc granaty AT w strone ich czolgow, macie uwazac na ich piechote oraz unikac z nimi kontatu.\nGdy zniszczynie pojazdy przeciwnika, wkraczamy my, 3 zalogantow wystarczy do obslugi czolgu, wezniemy ich z zaskoczenia. Zrozumiano? - Powiedzial Early do naszej zalogi.");
+            typeWriterEffect("Kolejna brudna robota, dawaj idziemy "+player.name+"! - powiedzial Brad");
+            typeWriterEffect("No nic na to nie, mimo ze nie chce to musze tam isc, nie zostawie Brada samego - pomyslalem");
+            typeWriterEffect("Wychodzimy z czolgu przez wlazy w wiezy, widzimy tylko ciemnosc, sniezyce, jakies moze 400 metrow przed nami widzimy male swiatla, jasno zolte i jedno jasno niebieskie... i ten swist wiatru.");
+            typeWriterEffect(player.name+ " mamy dwie opcje! - powiedzial Brad w tej sniezycy");
+            typeWriterEffect("1. Idziemy od storny lasu, przenikamy przez ich oboz polowy, podkladamy nasze granaty at i czekamy na Pershinga");
+            typeWriterEffect("2. Zaczekamy i zneutralizujemy 2 niemcow co jada w kubelwagonie na zwiad w ten rejon wsi, bierzemy ich mundury i zrobimy sabotaz");
+            typeWriterEffect("Wybor nalezy do ciebie");
+            int choice;
+            cin >> choice;
+            if (choice == 1) {
+                typeWriterEffect("Jestesmy na pozycji - powiedzial przez radio Brad do Early'iego");
+                typeWriterEffect("Zrozumiano zacznijcie dzialac");
+                typeWriterEffect("Odeszli od czolgow do baraku, kto idzie podlozyc ladunki?");
+                typeWriterEffect("1. Idz sam podlozyc ladunki");
+                typeWriterEffect("2. Rozkaz Bradowi to zrobic");
+                int choice;
+                cin >> choice;
+                if (choice == 1) {
+                    typeWriterEffect("Podaj mi je - Powiedzialem do Brada");
+                    typeWriterEffect("Uwarzaj na siebie stary, bede pilnowal ci plecow");
+                    typeWriterEffect("Dzieki ty tez uwazaj na siebie - Powiedzialem");
+                    typeWriterEffect("*podkladasz ladunki at na czolgi*");
+                    typeWriterEffect("*Jeszcze jeden i musze szybko wracac*");
+                    typeWriterEffect("*Nagle 2 metrowy super zolnierz pojawia sie za czolgiem*");
+                    typeWriterEffect("*Przerazony panikujesz i chowasz sie pod czolgiem*");
+                    typeWriterEffect("*Jestes pewien ze cie zauwazyl, schyla sie pod czolg*");
+                    typeWriterEffect("*Nagle slyszysz Brada krzyczacego, zwraca on na siebie uwage*");
+                    typeWriterEffect("*Ten zolnierz mial cos na plecach, jakby silnik rakietowy, czuc bylo od niego rope*\n*Nagle on wznosi sie w powietrze i kieruje sie w strone Brada.*");
+                    typeWriterEffect("*Nagle slyszysz huk, Pershing wkracza do akcji* Pewnie to zasluga Brada - Pomyslalem");
+                    typeWriterEffect("*Toczy sie zacieta walka, nagle widzisz czolg, ktorego nigdy nie widziales, jest caly szary, ma oznaczenia niemieckie oraz bardzo dziwna sylwetke, tak jakby jego dzialo i silnik byly ogromne.\nSlyszysz ogromny huk i niebieskie swiatlo, widzisz jak Pershing zostaje zamieniony w wrak, w ulamek sekundy po prostu polowa czolgu znika.");
+                    typeWriterEffect("*Wstales z pod czolgu, ktoremu miales podlozyc ladunek wybuchowy, widzisz tylko plomienie i zolnierzy biegajacych wokol*\n*Nagle ktos uderza cie z kolby karabinu w glowe i tracisz przytomnosc*");
+                    typeWriterEffect("*Budzisz sie* Trzymaja ciebie i Brada obok duzego transportowca, widzisz tych zolnierzy, maja na sobi ejakis pancerz i maski ze stali, calkowicie nowe bronie..");
+                    typeWriterEffect("Mieli jakies plecaki, mnostwo jakichs laczy, kabli, nigdy nie widzialem czegos podobnego");
+                    typeWriterEffect("Jestem ledwo przytomny ale widze go, Brada, ciagna go po ziemi do jakiegos transportera, jest 9 grudnia 45 roku, wojna ma sie skonczyc jutro, chociaz miala sie.\nNacisnij 1 aby kontynuowac");
+                }
+                else if (choice == 2) {
+                    
+                }
+            }
+            else if (choice == 2) {
+                typeWriterEffect("Zblizaja sie! - krzyczy Brad");
+                typeWriterEffect("*Leze na srodku drogi, czekam az wyjda z samochodu*");
+                typeWriterEffect("Czekam tylko na moment");
+                typeWriterEffect("Brad wychodzi i neutralizuje kierowce ktory zostal w pojezdzie");
+                typeWriterEffect("teraz moja czesc, droga jest sliska, przewrocilem tego zolnierza z latwoscia i obezwladnilem.");
+                typeWriterEffect("Patrz jakie dziwne mundury teraz maja! - powiedzial Brad");
+                typeWriterEffect("Pelno stalowych elementow i w ogole, skad oni maja na to pieniadze, jak przegrywaja ta wojna?");
+                typeWriterEffect("Miejmy nadzieje ze przegrywaja, nie mam juz zamiaru walczyc z szkopami - odpowiedzialem mu");
+                typeWriterEffect("Uwierz ja tez, do konca? - odpowiedzial Brad");
+                typeWriterEffect("Do konca bracie - odpowiedzialem");
+            }
+        }
     }
 
 
@@ -475,7 +611,7 @@ void tankPrologue(Player& player) {
                 typeWriterEffect("*Zaczyna się walka!*");
                 cout << "Twoje HP: " << player.health << " Obrazenia ciezkiego ataku:" << player.heavyAttackDamage << " Obrazenia lekkiego ataku:" << player.lightAttackDamage << " amunicja: " << player.ammo << endl;
                 cout << "Przeciwnik: |Straznik Klaus Jager|  HP: " << enemy.health << " DMG: 2" << enemy.attackDamage;
-                battle(player, enemy);
+                battle1(player, enemy);
                 if (player.health > 0) {
                     typeWriterEffect("*Bierzesz uniform i ekwipunek straznika*\n *!Odblokowano Sturmgewehr 1945!*\n +31 ammo\n +1 granat ap");
                 }
@@ -489,7 +625,7 @@ void tankPrologue(Player& player) {
             typeWriterEffect("*Zaczyna się walka!*");
             cout << "Twoje HP: " << player.health << " Obrazenia ciezkiego ataku:" << player.heavyAttackDamage << " Obrazenia lekkiego ataku:" << player.lightAttackDamage << " amunicja: " << player.ammo << endl;
             cout << "Przeciwnik: |Straznik Klaus Jager|  HP: "<< enemy.health << " DMG: " << enemy.attackDamage;
-            battle(player, enemy);
+            battle1(player, enemy);
             if (player.health > 0) {
                 typeWriterEffect("*Bierzesz uniform i ekwipunek straznika*\n *!Odblokowano Sturmgewehr 1945!*\n +31 ammo\n +1 granat ap");
             }
@@ -501,7 +637,35 @@ void tankPrologue(Player& player) {
         if (player.health == 100) {
             cout << "Zdrowie gracza:" << player.health << " Granaty ap:" << player.apgrenades << " Granaty at:" << player.atgrenades << " amunicja:" << player.ammo << endl;
             typeWriterEffect("Musze znalsc droge do labolatorium gdzie przetrzymuja Brada...");
-            ///////dalej
+            typeWriterEffect("Straznik powiedzial ze trzymia go w Sektio Eins, ktorej wejscie to Sektion Zwei, magazyn tego obiektu.");
+            typeWriterEffect("Z czystym mundurem,bez sladow walki bedzie to znacznie prostsze, chociaz mam nadzieje..");
+            typeWriterEffect("*..idziesz przez korytarz*\n*otwierasz stalowe drzwi, okazuje sie ze jestes teraz w magazynie*\n*zauwazasz wielki napis Sektion Eins, sekcja biochemiczna tego budynku, to tam jest Brad*");
+            typeWriterEffect("*widzisz zolnierza siedzacego na skrzyni, wola cie*");
+            typeWriterEffect("1. interakcja z zolnierzem");
+            typeWriterEffect("2. zignoruj go");
+            int choice;
+            cin >> choice;
+            if (choice == 1) {
+                typeWriterEffect("Halo, zolnierzu nie powinno cie tu byc, teraz to jest moja zmiana!");
+                typeWriterEffect("1. Przyslal mnie Herr Obersturmbannfuhrer po przepustke do Sektion Eins.");
+                typeWriterEffect("2. Klaus mnie przyslal po cos zeby sie dostac do Sektion eins, lepiej zebys to mial!");
+                int choice;
+                cin >> choice;
+                if (choice == 1) {
+                    typeWriterEffect("Ja gut! To ty jestes jager tak? Stephan mowil ze przyjdziesz po nia.\n Trzymaj!\n*Otrzymano przepustke Sektion Eins, nowa sciezka odblokowana*");
+
+
+                }
+                else if (choice == 2) {
+                    typeWriterEffect("Kto? Herr Obersturmbannfuhrer Klaus? *Zaczyna celowac z karabinu*");
+                    typeWriterEffect("*Patrzy z powaga na mnie*");
+                    typeWriterEffect("Dobrze zolnierzu, tutaj... \n*wrecza przepustke do Sektion Eins*\n Zabieraj sie do roboty");
+                    typeWriterEffect("Ja, naturalnie");
+                    typeWriterEffect("*Przechodzisz do Sektion Eins*");
+
+
+                }
+            }
 
         }
         else if (player.health != 100) {
@@ -554,7 +718,7 @@ void tankPrologue(Player& player) {
             }
             else if (choice == 2) {
                 typeWriterEffect("*Przechodzisz do Armory*");
-                typeWriterEffect("*Slyszysz Panzerhunda i 2 straznikow z bronia biala*");
+                typeWriterEffect("*Slyszysz Panzerhunda i 2 straznikow*");
                 typeWriterEffect("1. udawaj niemieckiego zolnierza");
                 typeWriterEffect("2. spowodoj zwarcie i odwroc uwage zolnierzy");
                 int choice;
@@ -565,7 +729,7 @@ void tankPrologue(Player& player) {
                     typeWriterEffect("Wiecie gdzie moge znalesc innych wiezniow? Przenosza mnie do pilnowania wieznia Brada Smitha");
                     typeWriterEffect("Hm? *spojrzyli na siebie z zdziwieniem straznicy* Idz do Sektion Eins, tam idz do straznika bramy on ci da wiecej informacji.");
                     typeWriterEffect("Danke!");
-                    typeWriterEffect("*Tyle karabinow, ladunkow wybuchowych, mozna by z nich zrobic dobry uzytek, no cos nic tu po mnie musze wyruszac do Sektion Eins*");
+                    typeWriterEffect("*Tyle karabinow, ladunkow wybuchowych, mozna by z nich zrobic dobry uzytek, no coz nic tu po mnie musze wyruszac do Sektion Eins*");
 
                     typeWriterEffect("*..idziesz przez korytarz*\n*otwierasz stalowe drzwi, okazuje sie ze jestes teraz w magazynie*\n*zauwazasz wielki napis Sektion Eins, sekcja biochemiczna tego budynku, cos ci mowi ze tam musisz sie udac*");
                     typeWriterEffect("*widzisz zolnierza siedzacego na skrzyni, wola cie*");
@@ -608,14 +772,150 @@ void tankPrologue(Player& player) {
                     }
                 }
                 else if (choice == 2) {
+                    typeWriterEffect("*Podchodzisz do skrzynki z bezpiecznikami*");
+                    typeWriterEffect("1. Wyciagnij bezpiecznik II");
+                    typeWriterEffect("2. Wyciagnij bezpiecznik I");
+                    int choice;
+                    cin >> choice;
+                    if (choice == 1) {
+                        typeWriterEffect("Achtung! Przerwa w dostawie pradu miedzy Sektion Eins i Sektion Zwei, elektrycy wzywani do napraw konserwacyjnych w poblizu zbrojowni!");
+                        typeWriterEffect("No to narobilem sobie klopotow, musze jak najszybciej isc do Sektion Zwei, cos mi mowi ze moge znalesc tam cos przydatnego...");
+                        typeWriterEffect("*Widzisz drzwi od zbrojowni. Co robisz?*");
+                        typeWriterEffect("1. wchodzisz do srodka");
+                        typeWriterEffect("2. kierujesz sie do Sektion Zwei");
+                        int choice;
+                        cin >> choice;
+                        if (choice == 1) {
+                            typeWriterEffect("Halo! - Powiedzialem");
+                            typeWriterEffect("Guten tag Soldaten! Co cie tu sprowadza? - odpowiedzieli");
+                            typeWriterEffect("Wiecie gdzie moge znalesc innych wiezniow? Przenosza mnie do pilnowania wieznia Brada Smitha");
+                            typeWriterEffect("Hm? *spojrzyli na siebie z zdziwieniem straznicy* Idz do Sektion Eins, tam idz do straznika bramy on ci da wiecej informacji.");
+                            typeWriterEffect("Danke!");
+                            typeWriterEffect("*Tyle karabinow, ladunkow wybuchowych, mozna by z nich zrobic dobry uzytek, no coz nic tu po mnie musze wyruszac do Sektion Eins*");
 
+                            typeWriterEffect("*..idziesz przez korytarz*\n*otwierasz stalowe drzwi, okazuje sie ze jestes teraz w magazynie*\n*ledwo zauwazasz wielki napis Sektion Eins przez brak pradu, jest to sekcja biochemiczna tego budynku, cos ci mowi ze tam musisz sie udac*");
+                            typeWriterEffect("*Stalowe dzrzwi sa otwarte*\n*Wchodzisz do Sektion Zwei*");
+                            
+                        }
+                        else if (choice == 2) {
+                            typeWriterEffect("*..idziesz przez korytarz*\n*otwierasz stalowe drzwi, okazuje sie ze jestes teraz w magazynie*\n*ledwo zauwazasz wielki napis Sektion Eins przez brak pradu, jest to sekcja biochemiczna tego budynku, cos ci mowi ze tam musisz sie udac*");
+                            typeWriterEffect("*Stalowe dzrzwi sa otwarte*\n*Wchodzisz do Sektion Zwei*");
+                        }
+                    }
+                    else if (choice == 2) {
+                        typeWriterEffect("Achtung! Przerwa w dostawie pradu w zbrojowni! Elektrycy maja sie kierowac do zbrojowni!");
+                        typeWriterEffect("No to narobilem sobie klopotow, musze jak najszybciej isc do zbrojowni, cos mi mowi ze moge znalesc tam cos przydatnego...");
+                        typeWriterEffect("*Jestes ukryty za drzwiami, wybiega 2 straznikow*");
+                        typeWriterEffect("*wchodzisz do srodka*");
+                        typeWriterEffect("*widzisz panzerhunda, ktory jest w trybie uspienia*");
+                        typeWriterEffect("1. Wez potrzebne uzbrojenie i rozgladaj sie po zbrojowni");
+                        typeWriterEffect("2. Wez potrzebne uzbrojenie i wyjdz");
+                        typeWriterEffect("3. Wez potrzebne uzbrojenie, rozgladaj sie po zbrojowni i sabotuj panzerhunda (mozliwe niepowodzenie!)");
+                        int choice;
+                        cin >> choice;
+                        if (choice == 1) {
+                            typeWriterEffect("*Podniesiono ulepszenie do Sturmgewehr 1945 'hamulec wylotowy'*");
+                            typeWriterEffect("*Podniesiono ulepszenie do Sturmgewehr 1945 'magazynek bebnowy'*");
+                            typeWriterEffect("+ 62 ammo");
+                            typeWriterEffect("+ Granat Diesla");
+                            player.ammo = 62;
+                            player.apgrenades += 1 ;
+                            typeWriterEffect("Przeszukiwac zbrojownie dalej?");
+                            typeWriterEffect("1. Tak");
+                            typeWriterEffect("2. Wyjdz");
+                            int choice;
+                            cin >> choice;
+                            if (choice == 1) {
+                                typeWriterEffect("Szukasz dalej...");
+                                typeWriterEffect("Panzerhund zostal obudzony!");
+                                Enemy enemy = { 600, 90 };
+                                typeWriterEffect("*Zaczyna się walka!*");
+                                cout << "Twoje HP: " << player.health << " Obrazenia ciezkiego ataku:" << player.heavyAttackDamage << " Obrazenia lekkiego ataku:" << player.lightAttackDamage << " amunicja: " << player.ammo << endl;
+                                cout << "Przeciwnik: |Panzerhund ausf.H|  HP: " << enemy.health << "  DMG: " << enemy.attackDamage;
+                                battle(player, enemy);
+                            }
+                            else if (choice == 2) {
+                                typeWriterEffect("Wychodzisz z zbrojownia");
+                            }
+
+                        }
+                        else if (choice == 2) {
+                            typeWriterEffect("*Podniesiono ulepszenie do Sturmgewehr 1945 'hamulec wylotowy'*");
+                            typeWriterEffect("*Podniesiono ulepszenie do Sturmgewehr 1945 'magazynek bebnowy'*");
+                            typeWriterEffect("+ 62 ammo");
+                            typeWriterEffect("+ Granat Diesla");
+                            player.ammo = 62;
+                            player.apgrenades += 1;
+                            typeWriterEffect("*Wychodzisz z zbrojownia*");
+                            typeWriterEffect("*Kierujesz sie drugim korytarzem do innej sekcji budnyku*\n*Jestes teraz w magazynie Sektion Zwei*");
+                            typeWriterEffect("Halo, zolnierzu nie powinno cie tu byc, teraz to jest moja zmiana!");
+                            typeWriterEffect("1. Przyslal mnie Herr Obersturmbannfuhrer po przepustke do Sektion Eins.");
+                            typeWriterEffect("2. Klaus mnie przyslal po cos zeby sie dostac do Sektion eins, lepiej zebys to mial!");
+                            int choice;
+                            cin >> choice;
+                            if (choice == 1) {
+                                typeWriterEffect("Ja gut! To ty jestes jager tak? Stephan mowil ze przyjdziesz po nia.\n Trzymaj!\n*Otrzymano przepustke Sektion Eins, nowa sciezka odblokowana*");
+                                typeWriterEffect("*Przechodzisz do Sektion Eins*");
+
+                            }
+                            else if (choice == 2) {
+                                typeWriterEffect("Kto? Herr Obersturmbannfuhrer Klaus? *Zaczyna celowac z karabinu*");
+                                typeWriterEffect("*zauwaza slady walki na twoim mundurze*");
+                                typeWriterEffect("Partyzanci!!! *strzela*");
+                                player.health = 0;
+                                return;
+
+                            }
+                        }
+                        else if (choice == 3) {
+                            typeWriterEffect("*Podniesiono ulepszenie do Sturmgewehr 1945 'hamulec wylotowy'*");
+                            typeWriterEffect("*Podniesiono ulepszenie do Sturmgewehr 1945 'magazynek bebnowy'*");
+                            typeWriterEffect("+ 62 ammo");
+                            typeWriterEffect("+ Granat Diesla");
+                            typeWriterEffect("+ Ladunek trotylu");
+                            player.ammo = 62;
+                            player.apgrenades += 1;
+                            typeWriterEffect("*Znaleziono dokumenty wieznia 4698*");
+                            typeWriterEffect("Wiezien 4698 Brad Smith, przetrzymywany w Sektion Eins.");
+                            typeWriterEffect("Mam cie Brad, trzymaj sie tam jeszcze troche.");
+                            typeWriterEffect("*Podlozyles trotyl pod Panzerhund*");
+                            typeWriterEffect("*Wychodzisz z zbrojownia*");
+                            typeWriterEffect("Kierujesz sie do Sektion Eins, tak gdzie jest przetrzymywany Brad, wybuch trotylu w zbrojowni spowodowal pozar oraz przejscie straznikow do Sektion Drei");
+                            typeWriterEffect("Nie ma straznikow przy bramie przejsciowej Sektion Zwei, *Przechodzisz do Sektion Eins*");
+
+
+                            
+                            
+                        }
+                    }
                 }
             }
 
         }
     }
 
+    ///////////////
+    if (player.health > 0) {
+        int choice;
+        typeWriterEffect("\n=== Rozdzial 2: Droga do domu ===");
+        typeWriterEffect("");
+       
 
+        cin >> choice;
+
+        if (choice == 1) {
+            
+           
+            
+        }
+        else if (choice == 2) {
+           
+        }
+
+        
+    }
+
+    ///////////////
 }
   
 
