@@ -101,6 +101,12 @@ struct Player {
     int defenseValue;
     int granadeAttack;
     int sturmgewehrAttack;
+    int lightAttackDamage2;
+    int heavyAttackDamage2;
+    int granadeAttack2;
+    int sturmgewehrAttack2;
+    bool key;
+    
 };
 
 struct Enemy {
@@ -157,6 +163,7 @@ void battle1(Player& player, Enemy& enemy) {
         if (player.health <= 0) {
             typeWriterEffect("Zostales pokonany!");
             break;
+            return;
         }
 
         // Wyswietl aktualny stan zdrowia
@@ -173,7 +180,7 @@ void battle(Player& player, Enemy& enemy) {
         typeWriterEffect("1. Lekki atak wrecz");
         typeWriterEffect("2. Ciezki atak wrecz");
         typeWriterEffect("3. Obrona");
-        typeWriterEffect("4. Rzuc granat");
+        typeWriterEffect("4. Granat");
         typeWriterEffect("5. Strzelaj z karabinu");
         cout << "Twoj wybor: ";
         cin >> choice;
@@ -198,23 +205,101 @@ void battle(Player& player, Enemy& enemy) {
             continue; // Przeciwnik nie dostaje obrazen, gracz sie tylko broni
         }
         else if (choice == 4){
-            int damage = player.granadeAttack;
-            enemy.health -= damage;
-            typeWriterEffect("Zadales " + to_string(damage) + " obrazen przeciwnikowi!");
-            player.apgrenades -= 1;
-            cout << "Pozostalo: " << player.apgrenades << " granatow" << endl;
+            if (player.apgrenades > 0) {
+                int damage = player.granadeAttack;
+                enemy.health -= damage;
+                typeWriterEffect("Zadales " + to_string(damage) + " obrazen przeciwnikowi!");
+                player.apgrenades -= 1;
+                cout << "Pozostalo: " << player.apgrenades << " granatow" << endl;
+            }
+            else {
+                typeWriterEffect("Nie masz juz granatow! Wybierz inna akcje.");
+                continue; // Przejdź do następnej iteracji pętli, pozwalając graczowi wybrać ponownie
+            }
         }
         else if (choice == 5) {
             int damage = player.sturmgewehrAttack;
             enemy.health -= damage;
             typeWriterEffect("Zadales " + to_string(damage) + " obrazen przeciwnikowi!");
             player.ammo -= 8;
-            cout << "Pozostalo: " << player.ammo << "amunicji i " << player.clip << "magazynek/ow" << endl;
+            cout << "Pozostalo: " << player.ammo << " amunicji i " << player.clip << " magazynek/ow" << endl;
 
         }else{
             typeWriterEffect("Nieprawidlowy wybor, tracisz ruch!");
         }
         
+        // Sprawdz stan przeciwnika
+        if (enemy.health <= 0) {
+            typeWriterEffect("Pokonales przeciwnika!");
+            break;
+        }
+
+        // Atak przeciwnika
+        int enemyDamage = enemy.attackDamage;
+        player.health -= enemyDamage;
+        typeWriterEffect("Przeciwnik atakuje, otrzymujesz " + to_string(enemyDamage) + " obrazen!");
+
+        // Sprawdz stan gracza
+        if (player.health <= 0) {
+            typeWriterEffect("Zostales pokonany!");
+            break;
+        }
+
+        // Wyswietl aktualny stan zdrowia
+        typeWriterEffect("Twoje zdrowie: " + to_string(player.health));
+        typeWriterEffect("Zdrowie przeciwnika: " + to_string(enemy.health));
+    }
+}
+
+void battle3(Player& player, Enemy& enemy) {
+    srand(time(0));
+    while (player.health > 0 && enemy.health > 0) {
+        int choice;
+        typeWriterEffect("\nWybierz akcje:");
+        typeWriterEffect("1. Lekki atak wrecz");
+        typeWriterEffect("2. Ciezki atak wrecz");
+        typeWriterEffect("3. Obrona");
+        typeWriterEffect("4. Strzelaj z karabinu");
+        cout << "Twoj wybor: ";
+        cin >> choice;
+
+        if (choice == 1) {
+            // Lekki atak
+            int damage = player.lightAttackDamage2;
+            enemy.health -= damage;
+            typeWriterEffect("Zadales " + to_string(damage) + " obrazen przeciwnikowi!");
+        }
+        else if (choice == 2) {
+            // Ciezki atak
+            int damage = player.heavyAttackDamage2;
+            enemy.health -= damage;
+            typeWriterEffect("Zadales " + to_string(damage) + " obrazen przeciwnikowi!");
+        }
+        else if (choice == 3) {
+            // Obrona
+            int reducedDamage = max(0, enemy.attackDamage - player.defenseValue);
+            player.health -= reducedDamage;
+            typeWriterEffect("Bronisz sie, otrzymujesz " + to_string(reducedDamage) + " obrazen!");
+            continue; // Przeciwnik nie dostaje obrazen, gracz sie tylko broni
+        }
+        else if (choice == 4) {
+            if (player.apgrenades > 0) {
+                int damage = player.granadeAttack;
+                enemy.health -= damage;
+                typeWriterEffect("Zadales " + to_string(damage) + " obrazen przeciwnikowi!");
+                player.apgrenades -= 1;
+                cout << "Pozostalo: " << player.apgrenades << " granatow" << endl;
+            }
+            else {
+                typeWriterEffect("Nie masz juz granatow! Wybierz inna akcje.");
+                continue; // Przejdź do następnej iteracji pętli, pozwalając graczowi wybrać ponownie
+            }
+
+        }
+        else {
+            typeWriterEffect("Nieprawidlowy wybor, tracisz ruch!");
+        }
+
         // Sprawdz stan przeciwnika
         if (enemy.health <= 0) {
             typeWriterEffect("Pokonales przeciwnika!");
@@ -253,6 +338,28 @@ Player createCharacter() {
 
     if (choice == 1) {
         player.unit = "Dzialonowy czolgu T26 Pershing";
+        player.key = false;
+        
+        player.health = 100;
+        player.heavyAttackDamage = 60;
+        player.lightAttackDamage = 25;
+        player.granadeAttack = 200;
+        player.sturmgewehrAttack = 80;
+        player.heavyAttackDamage2 = 60;
+        player.lightAttackDamage2 = 25;
+        player.granadeAttack2 = 200;
+        player.sturmgewehrAttack2 = 80;
+        player.defenseValue = 25;
+        player.ammo = 32;
+        player.clip = 8;
+        player.atgrenades = 1;
+        player.apgrenades = 2;
+        player.tank = { "T26 Pershing", 4, 5, 2 }; // Startowa ilość amunicji do czołgu
+    }
+    else {
+        std::cout << "Nieprawidlowy wybor. Ustawiono domyslnie czolgiste.\n";
+        player.unit = "Dzialonowy czolgu T26 Pershing";
+        player.key = false;
         player.health = 100;
         player.heavyAttackDamage = 60;
         player.lightAttackDamage = 25;
@@ -264,16 +371,6 @@ Player createCharacter() {
         player.atgrenades = 1;
         player.apgrenades = 2;
         player.tank = { "T26 Pershing", 4, 5, 2 }; // Startowa ilość amunicji do czołgu
-    }
-    else {
-        std::cout << "Nieprawidlowy wybor. Ustawiono domyslnie czolgiste.\n";
-        player.unit = "Dzialonowy czolgu T26 Pershing";
-        player.health = 100;
-        player.ammo = 32;
-        player.clip = 8;
-        player.atgrenades = 1;
-        player.apgrenades = 2;
-        player.tank = { "T26 Pershing", 4, 5, 2 };
     }
 
     std::cout << "Witaj, " << player.name << "! Wybrales jednostke: " << player.unit << ".\n";
@@ -501,11 +598,11 @@ void tankPrologue(Player& player) {
             player.atgrenades += 2;
             player.clip = 2;
             player.ammo = 56;
-            typeWriterEffect("Dobra oto plan, "+player.name+ " z Bradem pojdziecie podlozyc granaty AT w strone ich czolgow, macie uwazac na ich piechote oraz unikac z nimi kontatu.\nGdy zniszczynie pojazdy przeciwnika, wkraczamy my, 3 zalogantow wystarczy do obslugi czolgu, wezniemy ich z zaskoczenia. Zrozumiano? - Powiedzial Early do naszej zalogi.");
-            typeWriterEffect("Kolejna brudna robota, dawaj idziemy "+player.name+"! - powiedzial Brad");
+            typeWriterEffect("Dobra oto plan, " + player.name + " z Bradem pojdziecie podlozyc granaty AT w strone ich czolgow, macie uwazac na ich piechote oraz unikac z nimi kontatu.\nGdy zniszczynie pojazdy przeciwnika, wkraczamy my, 3 zalogantow wystarczy do obslugi czolgu, wezniemy ich z zaskoczenia. Zrozumiano? - Powiedzial Early do naszej zalogi.");
+            typeWriterEffect("Kolejna brudna robota, dawaj idziemy " + player.name + "! - powiedzial Brad");
             typeWriterEffect("No nic na to nie, mimo ze nie chce to musze tam isc, nie zostawie Brada samego - pomyslalem");
             typeWriterEffect("Wychodzimy z czolgu przez wlazy w wiezy, widzimy tylko ciemnosc, sniezyce, jakies moze 400 metrow przed nami widzimy male swiatla, jasno zolte i jedno jasno niebieskie... i ten swist wiatru.");
-            typeWriterEffect(player.name+ " mamy dwie opcje! - powiedzial Brad w tej sniezycy");
+            typeWriterEffect(player.name + " mamy dwie opcje! - powiedzial Brad w tej sniezycy");
             typeWriterEffect("1. Idziemy od storny lasu, przenikamy przez ich oboz polowy, podkladamy nasze granaty at i czekamy na Pershinga");
             typeWriterEffect("2. Zaczekamy i zneutralizujemy 2 niemcow co jada w kubelwagonie na zwiad w ten rejon wsi, bierzemy ich mundury i zrobimy sabotaz");
             typeWriterEffect("Wybor nalezy do ciebie");
@@ -538,13 +635,26 @@ void tankPrologue(Player& player) {
                     typeWriterEffect("Jestem ledwo przytomny ale widze go, Brada, ciagna go po ziemi do jakiegos transportera, jest 9 grudnia 45 roku, wojna ma sie skonczyc jutro, chociaz miala sie.\nNacisnij 1 aby kontynuowac");
                 }
                 else if (choice == 2) {
-                    
+                    typeWriterEffect("Uwarzaj na siebie stary, bede pilnowal ci plecow - Poweidzialem");
+                    typeWriterEffect("Dzieki ty tez uwazaj na siebie - Powiedzial Brad");
+                    typeWriterEffect("*Brad Podlozyl ladunki 2 z 3*");
+                    typeWriterEffect("*Nagle 2 metrowy super zolnierz pojawia sie za czolgiem*");
+                    typeWriterEffect("*Przerazony Brad panikuje i chowa sie pod czolgiem*");
+                    typeWriterEffect("*Postanawiasz wezwac Pershinga puki nie jest za pozno*");
+                    typeWriterEffect("Early wjezdzajcie tu juz!! - Krzyklem przez radio");
+                    typeWriterEffect("Zrozumiano, Mike ognia! - Powiedzial glos z radia");
+                    typeWriterEffect("*Nagle slyszysz huk, Pershing wkracza do akcji*");
+                    typeWriterEffect("*Toczy sie zacieta walka, nagle widzisz czolg, ktorego nigdy nie widziales, jest caly szary, ma oznaczenia niemieckie oraz bardzo dziwna sylwetke, tak jakby jego dzialo i silnik byly ogromne.\nSlyszysz ogromny huk i niebieskie swiatlo, widzisz jak Pershing zostaje zamieniony w wrak, w ulamek sekundy po prostu polowa czolgu znika.");
+                    typeWriterEffect("*Brad wstal z pod czolgu, ktoremu mial podlozyc ladunek wybuchowy, widzisz tylko plomienie i zolnierzy biegajacych wokol*\n*Nagle widzisz jak ten 2 metrowy zolnierz posiada jakis silnik rakietowy i obezwladnia Brada.\nSiedzisz dalej na tylach, nie wiesz co robic, nagle slyszysz dzwiek ubijajacego sie sniegu za soba, nagle ktos uderza cie z kolby karabinu w glowe i tracisz przytomnosc*");
+                    typeWriterEffect("*Budzisz sie* Trzymaja ciebie i Brada obok duzego transportowca, widzisz tych zolnierzy, maja na sobie jakis pancerz i maski ze stali, calkowicie nowe bronie..");
+                    typeWriterEffect("Mieli jakies plecaki, mnostwo jakichs laczy, kabli, nigdy nie widzialem czegos podobnego");
+                    typeWriterEffect("Jestem ledwo przytomny ale widze go, Brada, ciagna go po ziemi do jakiegos transportera, jest 9 grudnia 45 roku, wojna ma sie skonczyc jutro, chociaz miala sie.\nNacisnij 1 aby kontynuowac");
                 }
             }
             else if (choice == 2) {
                 typeWriterEffect("Zblizaja sie! - krzyczy Brad");
                 typeWriterEffect("*Leze na srodku drogi, czekam az wyjda z samochodu*");
-                typeWriterEffect("Czekam tylko na moment");
+                typeWriterEffect("Czekam tylko na odpowiedni moment");
                 typeWriterEffect("Brad wychodzi i neutralizuje kierowce ktory zostal w pojezdzie");
                 typeWriterEffect("teraz moja czesc, droga jest sliska, przewrocilem tego zolnierza z latwoscia i obezwladnilem.");
                 typeWriterEffect("Patrz jakie dziwne mundury teraz maja! - powiedzial Brad");
@@ -603,8 +713,10 @@ void tankPrologue(Player& player) {
                 player.apgrenades = 1;
                 player.atgrenades = 0;
                 player.clip = 1;
+                player.key = true;
 
-                
+
+
             }
             else if (choice == 2) {
                 Enemy enemy = { 80, 40 }; // Przeciwnik: 80HP, atak 15 obrazen
@@ -624,7 +736,7 @@ void tankPrologue(Player& player) {
             Enemy enemy = { 120, 60 }; // Przeciwnik: 100HP, atak 20 obrazen
             typeWriterEffect("*Zaczyna się walka!*");
             cout << "Twoje HP: " << player.health << " Obrazenia ciezkiego ataku:" << player.heavyAttackDamage << " Obrazenia lekkiego ataku:" << player.lightAttackDamage << " amunicja: " << player.ammo << endl;
-            cout << "Przeciwnik: |Straznik Klaus Jager|  HP: "<< enemy.health << " DMG: " << enemy.attackDamage;
+            cout << "Przeciwnik: |Straznik Klaus Jager|  HP: " << enemy.health << " DMG: " << enemy.attackDamage;
             battle1(player, enemy);
             if (player.health > 0) {
                 typeWriterEffect("*Bierzesz uniform i ekwipunek straznika*\n *!Odblokowano Sturmgewehr 1945!*\n +31 ammo\n +1 granat ap");
@@ -660,6 +772,7 @@ void tankPrologue(Player& player) {
                     typeWriterEffect("Kto? Herr Obersturmbannfuhrer Klaus? *Zaczyna celowac z karabinu*");
                     typeWriterEffect("*Patrzy z powaga na mnie*");
                     typeWriterEffect("Dobrze zolnierzu, tutaj... \n*wrecza przepustke do Sektion Eins*\n Zabieraj sie do roboty");
+                    player.key = true;
                     typeWriterEffect("Ja, naturalnie");
                     typeWriterEffect("*Przechodzisz do Sektion Eins*");
 
@@ -672,7 +785,7 @@ void tankPrologue(Player& player) {
             typeWriterEffect("Udalo ci sie przezyc, ale jestes zraniony!\nMusze znalesc Brada...");
             typeWriterEffect("*Widzisz przed soba 2 korytarze*");
             typeWriterEffect("1. Lewy prowadzi do niezajomego terenu placowki (*Sektion Zwei*)");
-            typeWriterEffect("2. Prawy prowadzi do zbrojowni (*mozliwi niebezpieczni wrogowie*)");
+            typeWriterEffect("2. Prawy prowadzi do zbrojowni (*mozliwi niebezpieczni wrogowie oraz nowe bronie, wyposazenie!*)");
             int choice;
             cin >> choice;
             if (choice == 1) {
@@ -684,13 +797,14 @@ void tankPrologue(Player& player) {
                 cin >> choice;
                 if (choice == 1) {
                     typeWriterEffect("Halo, zolnierzu nie powinno cie tu byc, teraz to jest moja zmiana!");
-                    typeWriterEffect("1. Przyslal mnie Herr Obersturmbannfuhrer po przepustke do Sektion Eins." );
-                    typeWriterEffect("2. Klaus mnie przyslal po cos zeby sie dostac do Sektion eins, lepiej zebys to mial!" );
+                    typeWriterEffect("1. Przyslal mnie Herr Obersturmbannfuhrer po przepustke do Sektion Eins.");
+                    typeWriterEffect("2. Klaus mnie przyslal po cos zeby sie dostac do Sektion eins, lepiej zebys to mial!");
                     int choice;
                     cin >> choice;
                     if (choice == 1) {
                         typeWriterEffect("Ja gut! To ty jestes jager tak? Stephan mowil ze przyjdziesz po nia.\n Trzymaj!\n*Otrzymano przepustke Sektion Eins, nowa sciezka odblokowana*");
                         typeWriterEffect("*Przechodzisz do Sektion Eins*");
+                        player.key = true;
 
                     }
                     else if (choice == 2) {
@@ -699,7 +813,7 @@ void tankPrologue(Player& player) {
                         typeWriterEffect("Partyzanci!!! *strzela*");
                         player.health = 0;
                         return;
-                        
+
                     }
                 }
                 else if (choice == 2) {
@@ -712,6 +826,7 @@ void tankPrologue(Player& player) {
                     typeWriterEffect("Erm... Sektion Eins! Rozkazy od wyzszego szczebla... wiesz.");
                     typeWriterEffect("Oh ja! naturalnie, trzymaj tu przepustke i znikaj stad, zebys nie dostal ujemnych punktow do dokumentoww jak ostatnim razem!");
                     typeWriterEffect("* Otrzymano przepustke Sektion Eins, nowa sciezka odblokowana * ");
+                    player.key = true;
                     typeWriterEffect("Naturalnie!");
                     typeWriterEffect("*Przechodzisz do Sektion Eins*");
                 }
@@ -746,6 +861,7 @@ void tankPrologue(Player& player) {
                         if (choice == 1) {
                             typeWriterEffect("Ja gut! To ty jestes jager tak? Stephan mowil ze przyjdziesz po nia.\n Trzymaj!\n*Otrzymano przepustke Sektion Eins, nowa sciezka odblokowana*");
                             typeWriterEffect("*Przechodzisz do Sektion Eins*");
+                            player.key = true;
 
                         }
                         else if (choice == 2) {
@@ -767,6 +883,7 @@ void tankPrologue(Player& player) {
                         typeWriterEffect("Erm... Sektion Eins! Rozkazy od wyzszego szczebla... wiesz.");
                         typeWriterEffect("Oh ja! naturalnie, trzymaj tu przepustke i znikaj stad, zebys nie dostal ujemnych punktow do dokumentoww jak ostatnim razem!");
                         typeWriterEffect("* Otrzymano przepustke Sektion Eins, nowa sciezka odblokowana * ");
+                        player.key = true;
                         typeWriterEffect("Naturalnie!");
                         typeWriterEffect("*Przechodzisz do Sektion Eins*");
                     }
@@ -795,7 +912,7 @@ void tankPrologue(Player& player) {
 
                             typeWriterEffect("*..idziesz przez korytarz*\n*otwierasz stalowe drzwi, okazuje sie ze jestes teraz w magazynie*\n*ledwo zauwazasz wielki napis Sektion Eins przez brak pradu, jest to sekcja biochemiczna tego budynku, cos ci mowi ze tam musisz sie udac*");
                             typeWriterEffect("*Stalowe dzrzwi sa otwarte*\n*Wchodzisz do Sektion Zwei*");
-                            
+
                         }
                         else if (choice == 2) {
                             typeWriterEffect("*..idziesz przez korytarz*\n*otwierasz stalowe drzwi, okazuje sie ze jestes teraz w magazynie*\n*ledwo zauwazasz wielki napis Sektion Eins przez brak pradu, jest to sekcja biochemiczna tego budynku, cos ci mowi ze tam musisz sie udac*");
@@ -818,8 +935,10 @@ void tankPrologue(Player& player) {
                             typeWriterEffect("*Podniesiono ulepszenie do Sturmgewehr 1945 'magazynek bebnowy'*");
                             typeWriterEffect("+ 62 ammo");
                             typeWriterEffect("+ Granat Diesla");
+                            typeWriterEffect("+ Granat Przciwpancerny");
                             player.ammo = 62;
-                            player.apgrenades += 1 ;
+                            player.apgrenades += 1;
+                            player.atgrenades += 1;
                             typeWriterEffect("Przeszukiwac zbrojownie dalej?");
                             typeWriterEffect("1. Tak");
                             typeWriterEffect("2. Wyjdz");
@@ -830,7 +949,7 @@ void tankPrologue(Player& player) {
                                 typeWriterEffect("Panzerhund zostal obudzony!");
                                 Enemy enemy = { 600, 90 };
                                 typeWriterEffect("*Zaczyna się walka!*");
-                                cout << "Twoje HP: " << player.health << " Obrazenia ciezkiego ataku:" << player.heavyAttackDamage << " Obrazenia lekkiego ataku:" << player.lightAttackDamage << " amunicja: " << player.ammo << endl;
+                                cout << "Twoje HP: " << player.health << " Obrazenia ciezkiego ataku:" << player.heavyAttackDamage << " Obrazenia lekkiego ataku:" << player.lightAttackDamage << " Obrazenia karabinu:" << player.sturmgewehrAttack << " amunicja:" << player.ammo << " Obrazenia granatu:" << player.granadeAttack << endl;
                                 cout << "Przeciwnik: |Panzerhund ausf.H|  HP: " << enemy.health << "  DMG: " << enemy.attackDamage;
                                 battle(player, enemy);
                             }
@@ -856,6 +975,7 @@ void tankPrologue(Player& player) {
                             if (choice == 1) {
                                 typeWriterEffect("Ja gut! To ty jestes jager tak? Stephan mowil ze przyjdziesz po nia.\n Trzymaj!\n*Otrzymano przepustke Sektion Eins, nowa sciezka odblokowana*");
                                 typeWriterEffect("*Przechodzisz do Sektion Eins*");
+                                player.key = true;
 
                             }
                             else if (choice == 2) {
@@ -872,10 +992,13 @@ void tankPrologue(Player& player) {
                             typeWriterEffect("*Podniesiono ulepszenie do Sturmgewehr 1945 'magazynek bebnowy'*");
                             typeWriterEffect("+ 62 ammo");
                             typeWriterEffect("+ Granat Diesla");
+                            typeWriterEffect("+ Granat Przeciwpancerny");
                             typeWriterEffect("+ Ladunek trotylu");
                             player.ammo = 62;
                             player.apgrenades += 1;
-                            typeWriterEffect("*Znaleziono dokumenty wieznia 4698*");
+                            player.atgrenades += 1;
+                            typeWriterEffect("*Znaleziono dokumenty wieznia 4698 i karte dostepu*");
+
                             typeWriterEffect("Wiezien 4698 Brad Smith, przetrzymywany w Sektion Eins.");
                             typeWriterEffect("Mam cie Brad, trzymaj sie tam jeszcze troche.");
                             typeWriterEffect("*Podlozyles trotyl pod Panzerhund*");
@@ -884,8 +1007,8 @@ void tankPrologue(Player& player) {
                             typeWriterEffect("Nie ma straznikow przy bramie przejsciowej Sektion Zwei, *Przechodzisz do Sektion Eins*");
 
 
-                            
-                            
+
+
                         }
                     }
                 }
@@ -893,30 +1016,272 @@ void tankPrologue(Player& player) {
 
         }
     }
+    else { return; }
 
-    ///////////////
     if (player.health > 0) {
         int choice;
         typeWriterEffect("\n=== Rozdzial 2: Droga do domu ===");
-        typeWriterEffect("");
-       
+        typeWriterEffect("Jestem w Sektion Eins, mam przepustke, wiec moge sie wtopic w tlum. Widze laboratoria, cele... Smrod przypomina mieszanke gabinetu dentystycznego i rzezni. To miejsce to koszmar. Musze znalezc Brada.");
+        typeWriterEffect("Jego akta wspominaly o projekcie 'Overlord'. Mam zle przeczucia, ale musze dzialac szybko.");
+
+        typeWriterEffect("Po chwili poszukiwan slysze odglosy Panzerhunda.");
+        typeWriterEffect("Co robic?");
+        typeWriterEffect("1. Podlozyc materialy wybuchowe i uszkodzic bestie.");
+        typeWriterEffect("2. Uciekac i szukac innej drogi.");
 
         cin >> choice;
 
         if (choice == 1) {
-            
-           
-            
+            typeWriterEffect("*Szukam tych ladunkow w moim plecaku...*");
+            if (player.atgrenades > 0) {
+                Enemy enemy = { 600, 90 };
+                typeWriterEffect("Podkladam ladunek pod rury grzewcze i widze jak ta bestia biegnie... Szybko musze sie odsunac od tego miejsca!");
+                typeWriterEffect("*Huk eksplozji*");
+                typeWriterEffect("Panzerhund przewraca sie i zostaje uszkodzony");
+                enemy.health -= 400;
+                typeWriterEffect("Musze go zniszczyc aby miec go z pozniej z glowy...");
+                cout << "Twoje HP: " << player.health << " Obrazenia ciezkiego ataku:" << player.heavyAttackDamage << " Obrazenia lekkiego ataku:" << player.lightAttackDamage << " Obrazenia karabinu:" << player.sturmgewehrAttack << " amunicja:" << player.ammo << " Obrazenia granatu:" << player.granadeAttack << endl;
+                cout << "Przeciwnik: |Panzerhund ausf.H|  HP: " << enemy.health << "  DMG: " << enemy.attackDamage;
+                battle(player, enemy);
+                if (player.health < 0) {
+                    return;
+                }
+            }
+            else {
+                typeWriterEffect("Nie mam juz materialow wybuchowych. *Panzerhund atakuje*");
+                player.health = 0;
+                return;
+            }
         }
         else if (choice == 2) {
-           
+            typeWriterEffect("Uciekam do bocznego korytarza. Slysze, jak Panzerhund depcze za mna. Musze znalezc inne przejscie.");
+            typeWriterEffect("*Widzisz uszkodzony szyb wentylacyjny, mozliwa ostatnia droga ucieczki (mozliwe utracenie punktow zdrowia)*");
+            typeWriterEffect("*Przechodzisz dalej?*");
+            typeWriterEffect("1. Tak");
+            typeWriterEffect("2. ...");
+            int choice;
+            cin >> choice;
+            if (choice == 1) {
+                typeWriterEffect("Nie mam wyboru, musze jak najszybciej uciec tej bestii!");
+                player.health = 43;
+                typeWriterEffect("Gdy przechodziles przez wentylacje spadles w dol do Sali 13.");
+            }
+            else {
+                typeWriterEffect("Przeciez musze uciec od tej bestii!!");
+                player.health = 43;
+                typeWriterEffect("Gdy przechodziles przez wentylacje spadles w dol do Sali 13.");
+            }
+
+        }
+        if (player.health > 0) {
+            typeWriterEffect("Jestem w jakies sali, trzymaja tu Brada. Widze go w srodku kapsuly. Wyglada inaczej...");
+            typeWriterEffect("Drzwi otwieraja sie. To nie jest Brad, ktorego znalem. To cybernetyczny zolnierz, bezmyslna maszyna. Czyli to jest ten caly 'Projekt Overlord'...");
+            typeWriterEffect("Brad patrzy na mnie pustymi oczami. Slysze glos w glosnikach: 'Wybralismy go na zolnierza idealnego, mlody wiek, mlody glupi umysl. Pokaz mu na co cie stac!'");
+
+            typeWriterEffect("Brad idzie w twoja strone co robisz?");
+            typeWriterEffect("1. Probuje przemowic do Brada, by przypomnial sobie, kim jest.");
+            typeWriterEffect("2. Zaczynam strzelac");
+
+            cin >> choice;
+
+            if (choice == 1) {
+                Enemy enemy = { 350, 50 };
+                typeWriterEffect("'Brad! To ja! " + player.name + "! Pamietasz mnie ? !'");
+                typeWriterEffect("Brad nie reaguje");
+                typeWriterEffect("*Uderza cie, przewracasz sie przez skrzynie*");
+                typeWriterEffect("W skrzyniach znajdujesz zastrzyk adrenaliny, oraz pancerz  *+ 90HP*");
+                player.health += 90;
+                typeWriterEffect("Zdajesz sobie sprawe ze to nie jest Brad, a maszyna, postanawiasz walczyc");
+                cout << "Twoje HP: " << player.health << " Obrazenia ciezkiego ataku:" << player.heavyAttackDamage << " Obrazenia lekkiego ataku:" << player.lightAttackDamage << " Obrazenia karabinu:" << player.sturmgewehrAttack << " amunicja:" << player.ammo << " Obrazenia granatu:" << player.granadeAttack << endl;
+                cout << "Przeciwnik: Overlord 1945  HP: " << enemy.health << "  DMG: " << enemy.attackDamage;
+                battle(player, enemy);
+                if (player.health = 0) {
+                    return;
+                }
+                else {
+                    typeWriterEffect("Uszkodzilem go! Pojawily sie szpary pomiedzy plytami pancerza.");
+                    typeWriterEffect("Co ty robisz!? Przynosisz nam hanbe! Wykoncz go teraz! - Powiedzialy glosy z glosnikow");
+                    typeWriterEffect("Maszyna dostaje szalu, biegnie w twoja strone!");
+                    typeWriterEffect("1. strzelaj");
+                    typeWriterEffect("2. unik");
+                    int choice;
+                    cin >> choice;
+                    if (choice == 1) {
+                        typeWriterEffect("Szpary w pancerzu masyzny byly za male, zostales pchniety na skrzynie z zaopatrzeniem");
+                        typeWriterEffect("Zbierasz pancerz  * +60hp *");
+                        player.health += 60;
+                    }
+                    else if (choice == 2) {
+                        typeWriterEffect("Zrobiles unik, widzisz na stole operacyjnym strzykawke z adrenalina");
+                        typeWriterEffect("Zabierasz ja  * +80hp *");
+                        player.health += 80;
+                    }
+                    typeWriterEffect("Maszyna jest tylem do ciebie, zaczynasz atak");
+                    typeWriterEffect("1. rzuc granat i atakuj");
+                    typeWriterEffect("2. atakuj");
+                    int a;
+                    cin >> a;
+                    if (a == 1) {
+                        typeWriterEffect("Brad dostal granatem diesla, ktory byl na stole, -1 fala ataku");
+                        Enemy enemy = { 200, 35 };
+                        battle(player, enemy);
+                        if (player.health > 0) {
+                            typeWriterEffect("Brad ostatecznie upadl na kolano, jest bardzo uszkodzony...");
+                            typeWriterEffect("Prze- przepraszam poruczniku... Ja naprawde nie chcialem ale to bylo silniejsze niz ja, ja naprawde nie chcialem pana skrzywdzic... - powiedzial Brad");
+                            typeWriterEffect("Wiem, Brad... tak bardzo mi przykro.. - powiedzialem z lzami w oczach");
+                            typeWriterEffect("Nie potrzebnie, prosze sir, prosze wykoncz mnie, ja juz tego nie zniose dluzej... - ostatnie slowa Brada");
+
+                            typeWriterEffect("Po zacietej walce udaje mi sie pokonac go. Brad ostatecznie pada na ziemie. Czuje bol i zal...");
+                        }
+                    }
+                    else if (a == 2) {
+                        Enemy enemy = { 250, 35 };
+                        typeWriterEffect("Atakujesz Brada!");
+                        battle(player, enemy);
+                        if (player.health > 0) {
+                            typeWriterEffect("Brad oberwal, jego plyty pancerza odpadly!");
+                            typeWriterEffect("Overlord 1945 bedzie otrzymywaj teraz wiecej obrazen!");
+                            typeWriterEffect("Jestes nasza najwieksza porazka! Osmieszasz nasz narod! Wykoncz go juz!");
+                            cout << "Twoje HP: " << player.health << " Obrazenia ciezkiego ataku:" << player.heavyAttackDamage2 << " Obrazenia lekkiego ataku:" << player.lightAttackDamage2 << " Obrazenia karabinu:" << player.sturmgewehrAttack2 << " amunicja:" << player.ammo << " Obrazenia granatu:" << player.granadeAttack2 << endl;
+                            cout << "Przeciwnik: Overlord 1945  HP: " << enemy.health << "  DMG: " << enemy.attackDamage;
+                            battle3(player, enemy);
+                            typeWriterEffect("\nBrad przygotowuje sie do ostatniego ataku!");
+                            typeWriterEffect("Nie zdolales uniknac jego szarzy, Maszyna trzyma cie w powietrzu za szyje");
+                            typeWriterEffect("Brad ja wiem ze ty tam jeszcze jestes! To ja" + player.name + "! Przypomnij sobie!! - powiedzialem");
+                            typeWriterEffect("*Nie slucha sie, zaczynasz tracic przytomnosc*");
+                            typeWriterEffect("*Rzucasz granat jako ostatni ratunek dla siebie*");
+                            typeWriterEffect("*BOOM granat wybuch i Brad pada na ziemie*");
+                            typeWriterEffect("*Zblizasz sie do wraku tej maszyny*");
+                            typeWriterEffect("Prze- przepraszam poruczniku... Ja naprawde nie chcialem ale to bylo silniejsze niz ja, ja naprawde nie chcialem pana skrzywdzic... - powiedzial Brad");
+                            typeWriterEffect("Wiem, Brad... tak bardzo mi przykro.. - powiedzialem z lzami w oczach");
+                            typeWriterEffect("Nie potrzebnie, prosze sir, prosze wykoncz mnie, ja juz tego nie zniose dluzej... - ostatnie slowa Brada");
+                            typeWriterEffect("Po zacietej walce udaje mi sie pokonac go. Brad ostatecznie pada na ziemie. Czuje bol i zal...");
+
+                        }
+                        else {
+                            player.health = 0;
+                            return;
+                        }
+                    }
+                    else {
+                        player.health = 0;
+                        return;
+                    }
+                }
+
+            }
+            else if (choice == 2) {
+                Enemy enemy = { 250, 45 };
+                typeWriterEffect("*Strzelam w ta maszyne, brak reakcji dalej idzie w moja strone*");
+                typeWriterEffect("'Brad! To ja! " + player.name + "! Pamiętasz mnie ? !'");
+                typeWriterEffect("Brad nie reaguje");
+                typeWriterEffect("*Uderza cie, przewracasz sie przez skrzynie*");
+                typeWriterEffect("W skrzyniach znajdujesz zastrzyk adrenaliny, oraz pancerz  *+ 90HP*");
+                player.health += 90;
+                typeWriterEffect("Zdajesz sobie sprawe ze to nie jest Brad, a maszyna, postanawiasz walczyc");
+                cout << "Twoje HP: " << player.health << " Obrazenia ciezkiego ataku:" << player.heavyAttackDamage << " Obrazenia lekkiego ataku:" << player.lightAttackDamage << " Obrazenia karabinu:" << player.sturmgewehrAttack << " amunicja:" << player.ammo << " Obrazenia granatu:" << player.granadeAttack << endl;
+                cout << "Przeciwnik: Overlord 1945  HP: " << enemy.health << "  DMG: " << enemy.attackDamage;
+                battle(player, enemy);
+                if (player.health = 0) {
+                    return;
+                }
+                else {
+                    typeWriterEffect("Uszkodzilem go! Pojawily sie szpary pomiedzy plytami pancerza.");
+                    typeWriterEffect("Co ty robisz!? Przynosisz nam hanbe! Wykoncz go teraz! - Powiedzialy glosy z glosnikow");
+                    typeWriterEffect("Maszyna dostaje szalu, biegnie w twoja strone!");
+                    typeWriterEffect("1. strzelaj");
+                    typeWriterEffect("2. unik");
+                    int choice;
+                    cin >> choice;
+                    if (choice == 1) {
+                        typeWriterEffect("Szpary w pancerzu masyzny byly za male, zostales pchniety na skrzynie z zaopatrzeniem");
+                        typeWriterEffect("Zbierasz pancerz  * +60hp *");
+                        player.health += 60;
+                    }
+                    else if (choice == 2) {
+                        typeWriterEffect("Zrobiles unik, widzisz na stole operacyjnym strzykawke z adrenalina");
+                        typeWriterEffect("Zabierasz ja  * +80hp *");
+                        player.health += 80;
+                    }
+                    typeWriterEffect("Maszyna jest tylem do ciebie, zaczynasz atak");
+                    typeWriterEffect("1. rzuc granat i atakuj");
+                    typeWriterEffect("2. atakuj");
+                    int a;
+                    cin >> a;
+                    if (a == 1) {
+                        typeWriterEffect("Brad dostal granatem diesla, ktory byl na stole, -1 fala ataku");
+                        Enemy enemy = { 200, 35 };
+                        battle(player, enemy);
+                        if (player.health > 0) {
+                            typeWriterEffect("Brad ostatecznie upadl na kolano, jest bardzo uszkodzony...");
+                            typeWriterEffect("Prze- przepraszam poruczniku... Ja naprawde nie chcialem ale to bylo silniejsze niz ja, ja naprawde nie chcialem pana skrzywdzic... - powiedzial Brad");
+                            typeWriterEffect("Wiem, Brad... tak bardzo mi przykro.. - powiedzialem z lzami w oczach");
+                            typeWriterEffect("Nie potrzebnie, prosze sir, prosze wykoncz mnie, ja juz tego nie zniose dluzej... - ostatnie slowa Brada");
+                            typeWriterEffect("Po zacietej walce udaje mi sie pokonac go. Brad ostatecznie pada na ziemie. Czuje bol i zal...");
+                        }
+                    }
+                    else if (a == 2) {
+                        Enemy enemy = { 250, 35 };
+                        typeWriterEffect("Atakujesz Brada!");
+                        battle(player, enemy);
+                        if (player.health > 0) {
+                            typeWriterEffect("Brad oberwal, jego plyty pancerza odpadly!");
+                            typeWriterEffect("Overlord 1945 bedzie otrzymywaj teraz wiecej obrazen!");
+                            typeWriterEffect("Jestes nasza najwieksza porazka! Osmieszasz nasz narod! Wykoncz go juz!");
+                            cout << "Twoje HP: " << player.health << " Obrazenia ciezkiego ataku:" << player.heavyAttackDamage2 << " Obrazenia lekkiego ataku:" << player.lightAttackDamage2 << " Obrazenia karabinu:" << player.sturmgewehrAttack2 << " amunicja:" << player.ammo << " Obrazenia granatu:" << player.granadeAttack2 << endl;
+                            cout << "Przeciwnik: Overlord 1945  HP: " << enemy.health << "  DMG: " << enemy.attackDamage;
+                            battle3(player, enemy);
+                            typeWriterEffect("Brad przygotowuje sie do ostatniego ataku!");
+                            typeWriterEffect("Nie zdolales uniknac jego szarzy, Maszyna trzyma cie w powietrzu za szyje");
+                            typeWriterEffect("Brad ja wiem ze ty tam jeszcze jestes! To ja" + player.name + "! Przypomnij sobie!! - powiedzialem");
+                            typeWriterEffect("*Nie slucha sie, zaczynasz tracic przytomnosc*");
+                            typeWriterEffect("*Rzucasz granat jako ostatni ratunek dla siebie*");
+                            typeWriterEffect("*BOOM granat wybuch i Brad pada na ziemie*");
+                            typeWriterEffect("*Zblizasz sie do wraku tej maszyny*");
+                            typeWriterEffect("Prze- przepraszam poruczniku... Ja naprawde nie chcialem ale to bylo silniejsze niz ja, ja naprawde nie chcialem pana skrzywdzic... - powiedzial Brad");
+                            typeWriterEffect("Wiem, Brad... tak bardzo mi przykro.. - powiedzialem z lzami w oczach");
+                            typeWriterEffect("Nie potrzebnie, prosze sir, prosze wykoncz mnie, ja juz tego nie zniose dluzej... - ostatnie slowa Brada");
+                            typeWriterEffect("Po zacietej walce udaje mi sie pokonac go. Brad ostatecznie pada na ziemie. Czuje bol i zal...");
+
+                        }
+                        else {
+                            player.health = 0;
+                            return;
+                        }
+                    }
+                    else {
+                        player.health = 0;
+                        return;
+                    }
+                }
+            }
+            else {
+                typeWriterEffect("Brad jest zbyt silny. Zadaje mi ostatni cios. Moja misja kończy się tutaj...");
+                player.health = 0;
+                return;
+            }
         }
 
-        
+        typeWriterEffect("Opuszczam Sektion Eins. Brad... Mam nadzieję, że znalazłeś spokój. Czas wrócić do domu.");
+        typeWriterEffect("*Resztaki sil udalo ci sie dotrzec do centrum sterowania i widzisz panel otwierajacy poszczegolne cele*");
+        typeWriterEffect("1. Otworz wszytskie cele i uciekaj z wiezienia przez wyjscie ewakuacyjne (odwroc uwage strazy!)");
+        typeWriterEffect("2. Nic nie rob, uciekaj z wiezienia przez wyjscie ewakuacyjne");
+        int a;
+        cin >> a;
+        if (a == 1) {
+            typeWriterEffect("Wprowadzasz zamieszanie w wiezieniu i uciekasz z niego, ukrywajac sie po ulicach jakiegos miasta, planujesz znalesc ruch oporu i resztki ocalalych z ataku na Berlin... \nTu historia sie konczy...");
+        }if (a == 2) {
+            typeWriterEffect("Uciekasz z wiezienia ale straznik z bramy zauwaza cie i strzela w twoja strone!");
+            player.health = 0;
+            return;
+        }
+        else {
+            typeWriterEffect("Straznicy cie znalezli!");
+            player.health = 0;
+            return;
+        }
     }
-
-    ///////////////
-}
+    }
   
 
 

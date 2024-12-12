@@ -1,4 +1,5 @@
 ﻿  gra.cpp
-C:\xampp\htdocs\repozytorium-praktyki\gra\gra\gra\gra.cpp(112,15): warning C4244: "argument": konwersja z "time_t" do "unsigned int", możliwa utrata danych
-C:\xampp\htdocs\repozytorium-praktyki\gra\gra\gra\gra.cpp(169,15): warning C4244: "argument": konwersja z "time_t" do "unsigned int", możliwa utrata danych
+C:\xampp\htdocs\repozytorium-praktyki\gra\gra\gra\gra.cpp(118,15): warning C4244: "argument": konwersja z "time_t" do "unsigned int", możliwa utrata danych
+C:\xampp\htdocs\repozytorium-praktyki\gra\gra\gra\gra.cpp(176,15): warning C4244: "argument": konwersja z "time_t" do "unsigned int", możliwa utrata danych
+C:\xampp\htdocs\repozytorium-praktyki\gra\gra\gra\gra.cpp(255,15): warning C4244: "argument": konwersja z "time_t" do "unsigned int", możliwa utrata danych
   gra.vcxproj -> C:\xampp\htdocs\repozytorium-praktyki\gra\gra\x64\Debug\gra.exe
