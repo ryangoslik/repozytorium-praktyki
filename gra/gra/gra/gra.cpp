@@ -6,10 +6,10 @@
 using namespace std;
 
 struct Tank {
-    std::string model;     // Model czołgu
-    int ammoAP;            // Amunicja przeciwpancerna
-    int ammoHE;            // Amunicja wybuchowa
-    int ammoHVAP;          // Amunicja wysokoprędkościowa
+    std::string model;     
+    int ammoAP;            
+    int ammoHE;            
+    int ammoHVAP;          
 
     void reloadAmmo(int ap, int he, int hvap) {
         ammoAP += ap;
@@ -58,12 +58,12 @@ struct Tank {
         std::cout << "Przeciw mocniej opancerzonym celom  HVAP: " << ammoHVAP << "\n";
     }
 };
-bool fastMode = false; // Deklaracja zmiennej fastMode
+bool fastMode = false; 
 
-void typeWriterEffect(const std::string& text, int delayMs = 25) {
+void typeWriterEffect(const std::string& text, int delayMs = 5) {
     for (char c : text) {
-        std::cout << c << std::flush; // Upewnij się, że znaki są natychmiast wyświetlane
-        if (!fastMode) { // Sprawdzenie trybu szybkiego
+        std::cout << c << std::flush; 
+        if (!fastMode) { 
             std::this_thread::sleep_for(std::chrono::milliseconds(delayMs));
         }
     }
@@ -91,11 +91,11 @@ struct Player {
     std::string name;
     std::string unit;
     int health;
-    Tank tank; // Dodano czołg jako część gracza
-    int ammo;            // Amunicja do broni osobistej
-    int clip;            // Magazynki
-    int atgrenades;      // Granaty przeciwczołgowe
-    int apgrenades;      // Granaty odłamkowe
+    Tank tank; 
+    int ammo;            
+    int clip;
+    int atgrenades;      
+    int apgrenades;      
     int lightAttackDamage;
     int heavyAttackDamage;
     int defenseValue;
@@ -126,47 +126,48 @@ void battle1(Player& player, Enemy& enemy) {
         cin >> choice;
 
         if (choice == 1) {
-            // Lekki atak
+            
             int damage = player.lightAttackDamage;
             enemy.health -= damage;
             typeWriterEffect("Zadales " + to_string(damage) + " obrazen przeciwnikowi!");
         }
         else if (choice == 2) {
-            // Ciezki atak
+            
             int damage = player.heavyAttackDamage;
             enemy.health -= damage;
             typeWriterEffect("Zadales " + to_string(damage) + " obrazen przeciwnikowi!");
         }
         else if (choice == 3) {
-            // Obrona
+            
             int reducedDamage = max(0, enemy.attackDamage - player.defenseValue);
             player.health -= reducedDamage;
             typeWriterEffect("Bronisz sie, otrzymujesz " + to_string(reducedDamage) + " obrazen!");
-            continue; // Przeciwnik nie dostaje obrazen, gracz sie tylko broni
+            continue; 
         }
         else {
             typeWriterEffect("Nieprawidlowy wybor, tracisz ruch!");
         }
 
-        // Sprawdz stan przeciwnika
+    
         if (enemy.health <= 0) {
             typeWriterEffect("Pokonales przeciwnika!");
             break;
+           
         }
 
-        // Atak przeciwnika
+        
         int enemyDamage = enemy.attackDamage;
         player.health -= enemyDamage;
         typeWriterEffect("Przeciwnik atakuje, otrzymujesz " + to_string(enemyDamage) + " obrazen!");
 
-        // Sprawdz stan gracza
+        
         if (player.health <= 0) {
             typeWriterEffect("Zostales pokonany!");
             break;
             return;
         }
 
-        // Wyswietl aktualny stan zdrowia
+     
         typeWriterEffect("Twoje zdrowie: " + to_string(player.health));
         typeWriterEffect("Zdrowie przeciwnika: " + to_string(enemy.health));
     }
@@ -186,23 +187,23 @@ void battle(Player& player, Enemy& enemy) {
         cin >> choice;
 
         if (choice == 1) {
-            // Lekki atak
+          
             int damage = player.lightAttackDamage;
             enemy.health -= damage;
             typeWriterEffect("Zadales " + to_string(damage) + " obrazen przeciwnikowi!");
         }
         else if (choice == 2) {
-            // Ciezki atak
+            
             int damage = player.heavyAttackDamage;
             enemy.health -= damage;
             typeWriterEffect("Zadales " + to_string(damage) + " obrazen przeciwnikowi!");
         }
         else if (choice == 3) {
-            // Obrona
+         
             int reducedDamage = max(0, enemy.attackDamage - player.defenseValue);
             player.health -= reducedDamage;
             typeWriterEffect("Bronisz sie, otrzymujesz " + to_string(reducedDamage) + " obrazen!");
-            continue; // Przeciwnik nie dostaje obrazen, gracz sie tylko broni
+            continue;
         }
         else if (choice == 4){
             if (player.apgrenades > 0) {
@@ -214,7 +215,7 @@ void battle(Player& player, Enemy& enemy) {
             }
             else {
                 typeWriterEffect("Nie masz juz granatow! Wybierz inna akcje.");
-                continue; // Przejdź do następnej iteracji pętli, pozwalając graczowi wybrać ponownie
+                continue;
             }
         }
         else if (choice == 5) {
@@ -228,24 +229,26 @@ void battle(Player& player, Enemy& enemy) {
             typeWriterEffect("Nieprawidlowy wybor, tracisz ruch!");
         }
         
-        // Sprawdz stan przeciwnika
+        
         if (enemy.health <= 0) {
             typeWriterEffect("Pokonales przeciwnika!");
             break;
+           
         }
 
-        // Atak przeciwnika
+       
         int enemyDamage = enemy.attackDamage;
         player.health -= enemyDamage;
         typeWriterEffect("Przeciwnik atakuje, otrzymujesz " + to_string(enemyDamage) + " obrazen!");
 
-        // Sprawdz stan gracza
+        
         if (player.health <= 0) {
             typeWriterEffect("Zostales pokonany!");
             break;
+            return;
         }
 
-        // Wyswietl aktualny stan zdrowia
+        
         typeWriterEffect("Twoje zdrowie: " + to_string(player.health));
         typeWriterEffect("Zdrowie przeciwnika: " + to_string(enemy.health));
     }
@@ -264,23 +267,23 @@ void battle3(Player& player, Enemy& enemy) {
         cin >> choice;
 
         if (choice == 1) {
-            // Lekki atak
+            
             int damage = player.lightAttackDamage2;
             enemy.health -= damage;
             typeWriterEffect("Zadales " + to_string(damage) + " obrazen przeciwnikowi!");
         }
         else if (choice == 2) {
-            // Ciezki atak
+            
             int damage = player.heavyAttackDamage2;
             enemy.health -= damage;
             typeWriterEffect("Zadales " + to_string(damage) + " obrazen przeciwnikowi!");
         }
         else if (choice == 3) {
-            // Obrona
+            
             int reducedDamage = max(0, enemy.attackDamage - player.defenseValue);
             player.health -= reducedDamage;
             typeWriterEffect("Bronisz sie, otrzymujesz " + to_string(reducedDamage) + " obrazen!");
-            continue; // Przeciwnik nie dostaje obrazen, gracz sie tylko broni
+            continue; 
         }
         else if (choice == 4) {
             if (player.apgrenades > 0) {
@@ -292,7 +295,7 @@ void battle3(Player& player, Enemy& enemy) {
             }
             else {
                 typeWriterEffect("Nie masz juz granatow! Wybierz inna akcje.");
-                continue; // Przejdź do następnej iteracji pętli, pozwalając graczowi wybrać ponownie
+                continue; 
             }
 
         }
@@ -300,30 +303,31 @@ void battle3(Player& player, Enemy& enemy) {
             typeWriterEffect("Nieprawidlowy wybor, tracisz ruch!");
         }
 
-        // Sprawdz stan przeciwnika
+       
         if (enemy.health <= 0) {
             typeWriterEffect("Pokonales przeciwnika!");
             break;
         }
 
-        // Atak przeciwnika
+       
         int enemyDamage = enemy.attackDamage;
         player.health -= enemyDamage;
         typeWriterEffect("Przeciwnik atakuje, otrzymujesz " + to_string(enemyDamage) + " obrazen!");
 
-        // Sprawdz stan gracza
+        
         if (player.health <= 0) {
             typeWriterEffect("Zostales pokonany!");
             break;
+            return;
         }
 
-        // Wyswietl aktualny stan zdrowia
+       
         typeWriterEffect("Twoje zdrowie: " + to_string(player.health));
         typeWriterEffect("Zdrowie przeciwnika: " + to_string(enemy.health));
     }
 }
 
-// Funkcja do tworzenia postaci
+
 Player createCharacter() {
     Player player;
       
@@ -354,7 +358,7 @@ Player createCharacter() {
         player.clip = 8;
         player.atgrenades = 1;
         player.apgrenades = 2;
-        player.tank = { "T26 Pershing", 4, 5, 2 }; // Startowa ilość amunicji do czołgu
+        player.tank = { "T26 Pershing", 4, 5, 2 }; 
     }
     else {
         std::cout << "Nieprawidlowy wybor. Ustawiono domyslnie czolgiste.\n";
@@ -370,18 +374,18 @@ Player createCharacter() {
         player.clip = 8;
         player.atgrenades = 1;
         player.apgrenades = 2;
-        player.tank = { "T26 Pershing", 4, 5, 2 }; // Startowa ilość amunicji do czołgu
+        player.tank = { "T26 Pershing", 4, 5, 2 }; 
     }
 
     std::cout << "Witaj, " << player.name << "! Wybrales jednostke: " << player.unit << ".\n";
     return player;
 }
 
-// Funkcja do stopniowego wyświetlania tekstu
 
 
 
-// Funkcja fabularna dla załogi czołgu
+
+
 void tankPrologue(Player& player) {
     int choice;
     typeWriterEffect("\n=== Prolog: " + player.unit + " ===");
@@ -492,24 +496,24 @@ void tankPrologue(Player& player) {
         typeWriterEffect("Dobra robota " + player.name + "!  \nJohn ruszajmy w droge z nasza 3 dywizja pancerna! - Powiedzial Early ");
         typeWriterEffect("Robi sie! - Krzyknal kierowca");
         typeWriterEffect("*Podazalismy w strone Berlina, cala 3 Dywizja Pancerna i 1. Armia Amerykanska, to oni spotkali sie jako pierwsi z armia radziecka\n w miescie gdzie mielismy sie zatrzymac.* ");
-        typeWriterEffect("*Dowiedzielismy sie ze tylko komunisci przeprowadza atak na Berlin. Boze tyle drogi za nami i nawet nie mozemy sami zniszczyc gniazda tych szerszeni???\n*");
-        typeWriterEffect("*Chociaz wyzwolilismy inne miasta, takie jak Kolonia. Robi sie coraz zimniej, ta wojna sie przeciaga i to przez tych komuchow!\n*");
+        typeWriterEffect("*Dowiedzielismy sie ze tylko komunisci przeprowadza atak na Berlin. Boze tyle drogi za nami i nawet nie mozemy sami zniszczyc gniazda tych szerszeni???*");
+        typeWriterEffect("*Chociaz wyzwolilismy inne miasta, takie jak Kolonia. Robi sie coraz zimniej, ta wojna sie przeciaga i to przez tych komuchow!*");
         typeWriterEffect("*Gdybysmy tylko mogli byc teraz w Berlinie... Rzesza padla by po niecalym miesiacu walki!\n Ale nie, ten egoistyczny komuch Stalin mysli ze zmobilizuje wschodnia Europe i mysli zwyciezy.*");
-        typeWriterEffect("Mamy jeszcze 13 kilometrow do Torgau, w miescie gdzie 1. Armia Amerykanska juz powina tak stacjonowac z Ruskami! - Powiedzial Early\n");
-        typeWriterEffect("Nie odpowiadaja dowodco! - Krzyknal Brad sprawdzajac radio.\n ");
+        typeWriterEffect("Mamy jeszcze 13 kilometrow do Torgau, w miescie gdzie 1. Armia Amerykanska juz powina tak stacjonowac z Ruskami! - Powiedzial Early");
+        typeWriterEffect("Nie odpowiadaja dowodco! - Krzyknal Brad sprawdzajac radio. ");
         typeWriterEffect("To pewnie przez warunki pogodowe, jest zimno i jeszcze ta sneizyca, zachowajcie spokoj - Powiedzial dowodca\n ");
-        typeWriterEffect("*Nie powiem ciezko zachowac spokoj w takich sytuacjach jak ta*\n ");
-        typeWriterEffect("Dowodco?- powiedzial Kurt, nasz kierowca.\n ");
-        typeWriterEffect("To nie moze byc prawdziwe.. - Nie dowierzal Early\n ");
-        typeWriterEffect("*Niczego tam nie bylo, doslownie niczego... ani 1. Armi Amerykanskiej ani Sowietow\n ");
-        typeWriterEffect("tylko same wraki naszych i ruskich czolgow, rozszarpane,po przecinane, to nie wyglada na obrazeni ad dziala czy czolgu!*\n ");
-        typeWriterEffect("Tylko same plomienie i budnyki zrownane z ziemia. Nie wiem czy to szczescie ze natrafilismy na opuznienie i opor w Koloni\n ");
-        typeWriterEffect("ale jedno jest wiadome ze.. co ja wygaduje!? Nic nie jest wiadome!*\n ");
-        typeWriterEffect("Dowodco pozostale ocalale t34 na 2 odleglosc 400 metrow - powiedzial Mike. \n ");
-        typeWriterEffect("Zdobyczne.. oznaczenia niemieckie na bokach wiez, nie mozemy sie pokazac. Zgasic swiatla i silnik! - powiedzial Early\n ");
-        typeWriterEffect("Jaki plan? - zaczyna sie dyskusja\n ");
-        typeWriterEffect("1. zaproponuj atak frontalny, nasz czolg ma znacznie lepszy pancerz o ile nas nie oflanukja wiec 3 czolgi t34 nie beda dla nas problemem\n ");
-        typeWriterEffect("2. zaproponuj atak partyzancki z uzyciem materialu wybuchowego i garantow at\n ");
+        typeWriterEffect("*Nie powiem ciezko zachowac spokoj w takich sytuacjach jak ta* ");
+        typeWriterEffect("Dowodco?- powiedzial Kurt, nasz kierowca. ");
+        typeWriterEffect("To nie moze byc prawdziwe.. - Nie dowierzal Early ");
+        typeWriterEffect("*Niczego tam nie bylo, doslownie niczego... ani 1. Armi Amerykanskiej ani Sowietow ");
+        typeWriterEffect("tylko same wraki naszych i ruskich czolgow, rozszarpane,po przecinane, to nie wyglada na obrazeni ad dziala czy czolgu!* ");
+        typeWriterEffect("Tylko same plomienie i budnyki zrownane z ziemia. Nie wiem czy to szczescie ze natrafilismy na opuznienie i opor w Koloni ");
+        typeWriterEffect("ale jedno jest wiadome ze.. co ja wygaduje!? Nic nie jest wiadome!* ");
+        typeWriterEffect("Dowodco pozostale ocalale t34 na 2 odleglosc 400 metrow - powiedzial Mike.  ");
+        typeWriterEffect("Zdobyczne.. oznaczenia niemieckie na bokach wiez, nie mozemy sie pokazac. Zgasic swiatla i silnik! - powiedzial Early ");
+        typeWriterEffect("Jaki plan? - zaczyna sie dyskusja ");
+        typeWriterEffect("1. zaproponuj atak frontalny, nasz czolg ma znacznie lepszy pancerz,\no ile nas nie oflanukja wiec 3 czolgi t34 nie beda dla nas problemem.");
+        typeWriterEffect("2. zaproponuj atak partyzancki z uzyciem materialu wybuchowego i garantow at.");
 
 
 
@@ -531,7 +535,7 @@ void tankPrologue(Player& player) {
             std::cin >> choice;
 
             if (choice == 1) {
-                if (player.tank.ammoAP > 0) { // Sprawdzamy, czy jest amunicja AP
+                if (player.tank.ammoAP > 0) { 
                     player.tank.fire("AP");
                     typeWriterEffect("Cel zniszczony! - Krzyknal Brad");
                     typeWriterEffect("Nastepny tuz przed nami!! - Krzyknal John");
@@ -574,7 +578,7 @@ void tankPrologue(Player& player) {
                     typeWriterEffect("*Zostalismy trafieni w bok wiezy, widzialem same iskry*");
                     typeWriterEffect("*Niemieccy zolnierze wyciagli mnie i Brada z naszego czolgu*");
                     typeWriterEffect("*Mieli jakies plecaki, mnostwo jakichs laczy, kabli, nigdy nie widzialem czegos podobnego*");
-                    typeWriterEffect("*Jestem ledwo przytomny ale widze go, Brada, ciagna go po ziemi do jakiegos transportera, jest 9 grudnia 45 roku, wojna ma sie skonczyc jutro, chociaz miala sie.*\nNacisnij 1 aby kontynuowac");
+                    typeWriterEffect("*Jestem ledwo przytomny ale widze go, Brada, ciagna go po ziemi do jakiegos transportera, jest 9 grudnia 45 roku, wojna ma sie skonczyc jutro, chociaz miala sie.*");
                 }
             }
             else if (choice == 2) {
@@ -583,7 +587,7 @@ void tankPrologue(Player& player) {
                 typeWriterEffect("*Zostalismy trafieni w bok wiezy, widzialem same iskry*");
                 typeWriterEffect("*Niemieccy zolnierze wyciagli mnie i Brada z naszego czolgu*");
                 typeWriterEffect("*Mieli jakies plecaki, mnostwo jakichs laczy, kabli, nigdy nie widzialem czegos podobnego*");
-                typeWriterEffect("*Jestem ledwo przytomny ale widze go, Brada, ciagna go po ziemi do jakiegos transportera, jest 9 grudnia 45 roku, wojna ma sie skonczyc jutro, chociaz miala sie.*\nNacisnij 1 aby kontynuowac");
+                typeWriterEffect("*Jestem ledwo przytomny ale widze go, Brada, ciagna go po ziemi do jakiegos transportera, jest 9 grudnia 45 roku, wojna ma sie skonczyc jutro, chociaz miala sie.*");
             }
             else {
                 typeWriterEffect("Nieprawidlowy wybor! Strata czasu, przeciwnik atakuje!");
@@ -632,7 +636,7 @@ void tankPrologue(Player& player) {
                     typeWriterEffect("*Wstales z pod czolgu, ktoremu miales podlozyc ladunek wybuchowy, widzisz tylko plomienie i zolnierzy biegajacych wokol*\n*Nagle ktos uderza cie z kolby karabinu w glowe i tracisz przytomnosc*");
                     typeWriterEffect("*Budzisz sie* Trzymaja ciebie i Brada obok duzego transportowca, widzisz tych zolnierzy, maja na sobi ejakis pancerz i maski ze stali, calkowicie nowe bronie..");
                     typeWriterEffect("Mieli jakies plecaki, mnostwo jakichs laczy, kabli, nigdy nie widzialem czegos podobnego");
-                    typeWriterEffect("Jestem ledwo przytomny ale widze go, Brada, ciagna go po ziemi do jakiegos transportera, jest 9 grudnia 45 roku, wojna ma sie skonczyc jutro, chociaz miala sie.\nNacisnij 1 aby kontynuowac");
+                    typeWriterEffect("Jestem ledwo przytomny ale widze go, Brada, ciagna go po ziemi do jakiegos transportera, jest 9 grudnia 45 roku, wojna ma sie skonczyc jutro, chociaz miala sie.");
                 }
                 else if (choice == 2) {
                     typeWriterEffect("Uwarzaj na siebie stary, bede pilnowal ci plecow - Poweidzialem");
@@ -648,7 +652,7 @@ void tankPrologue(Player& player) {
                     typeWriterEffect("*Brad wstal z pod czolgu, ktoremu mial podlozyc ladunek wybuchowy, widzisz tylko plomienie i zolnierzy biegajacych wokol*\n*Nagle widzisz jak ten 2 metrowy zolnierz posiada jakis silnik rakietowy i obezwladnia Brada.\nSiedzisz dalej na tylach, nie wiesz co robic, nagle slyszysz dzwiek ubijajacego sie sniegu za soba, nagle ktos uderza cie z kolby karabinu w glowe i tracisz przytomnosc*");
                     typeWriterEffect("*Budzisz sie* Trzymaja ciebie i Brada obok duzego transportowca, widzisz tych zolnierzy, maja na sobie jakis pancerz i maski ze stali, calkowicie nowe bronie..");
                     typeWriterEffect("Mieli jakies plecaki, mnostwo jakichs laczy, kabli, nigdy nie widzialem czegos podobnego");
-                    typeWriterEffect("Jestem ledwo przytomny ale widze go, Brada, ciagna go po ziemi do jakiegos transportera, jest 9 grudnia 45 roku, wojna ma sie skonczyc jutro, chociaz miala sie.\nNacisnij 1 aby kontynuowac");
+                    typeWriterEffect("Jestem ledwo przytomny ale widze go, Brada, ciagna go po ziemi do jakiegos transportera, jest 9 grudnia 45 roku, wojna ma sie skonczyc jutro, chociaz miala sie.");
                 }
             }
             else if (choice == 2) {
@@ -662,7 +666,34 @@ void tankPrologue(Player& player) {
                 typeWriterEffect("Miejmy nadzieje ze przegrywaja, nie mam juz zamiaru walczyc z szkopami - odpowiedzialem mu");
                 typeWriterEffect("Uwierz ja tez, do konca? - odpowiedzial Brad");
                 typeWriterEffect("Do konca bracie - odpowiedzialem");
+
+                typeWriterEffect("Ubralismy te mundury i dotarlismy na teren wroga");
+                typeWriterEffect("Cos sie nie zgadzalo patrzyli na nas z brakiem szacunku. Nie rozumiem dlaczego");
+                
+                typeWriterEffect("Nagle 2 metrowy super zolnierz pojawia sie przed naszym pojazdem");
+                typeWriterEffect("Amerykanie! - Krzyknal, lapiac nas pojazd");
+                typeWriterEffect("Brad teraz! - powiedzialem");
+                typeWriterEffect("Early wjezdzajcie tu juz!! - Krzyczy Brad");
+                typeWriterEffect("Zrozumiano, Mike ognia! - Powiedzial glos z radia");
+                typeWriterEffect("*Nagle slyszysz huk, Pershing wkracza do akcji*");
+                typeWriterEffect("*Pershing trafil super zolnierza, jednoczesnie przewracajac nasz pojazd.*");
+
+                typeWriterEffect("*Toczy sie zacieta walka, nagle widzisz czolg, ktorego nigdy nie widziales, jest caly szary, ma oznaczenia niemieckie oraz bardzo dziwna sylwetke, tak jakby jego dzialo i silnik byly ogromne.\nSlyszysz ogromny huk i niebieskie swiatlo, widzisz jak Pershing zostaje zamieniony w wrak, w ulamek sekundy po prostu polowa czolgu znika.");
+                typeWriterEffect("*Ty i Brad wstaliscie z pod pojazdu, widzicie tylko plomienie i zolnierzy biegajacych wokol*\n*Nagle widzisz jak ten 2 metrowy zolnierz obezwladnia Brada, pozostali zolnierze otaczaja cie, nagle ktos uderza cie z kolby karabinu w glowe i tracisz przytomnosc*");
+                typeWriterEffect("*Budzisz sie* Trzymaja ciebie i Brada obok duzego transportowca, widzisz tych zolnierzy, maja na sobie jakis pancerz i maski ze stali, calkowicie nowe bronie..");
+                typeWriterEffect("Mieli jakies plecaki, mnostwo jakichs laczy, kabli, nigdy nie widzialem czegos podobnego");
+                typeWriterEffect("Jestem ledwo przytomny ale widze go, Brada, ciagna go po ziemi do jakiegos transportera, jest 9 grudnia 45 roku, wojna ma sie skonczyc jutro, chociaz miala sie.");
             }
+            else {
+                typeWriterEffect("Zla decyzja");
+                player.health = 0;
+                return;
+            }
+        }
+        else {
+            typeWriterEffect("Bledna decyzja");
+            player.health = 0;
+            return;
         }
     }
 
@@ -719,7 +750,7 @@ void tankPrologue(Player& player) {
 
             }
             else if (choice == 2) {
-                Enemy enemy = { 80, 40 }; // Przeciwnik: 80HP, atak 15 obrazen
+                Enemy enemy = { 80, 40 }; 
                 typeWriterEffect("*Zaczyna się walka!*");
                 cout << "Twoje HP: " << player.health << " Obrazenia ciezkiego ataku:" << player.heavyAttackDamage << " Obrazenia lekkiego ataku:" << player.lightAttackDamage << " amunicja: " << player.ammo << endl;
                 cout << "Przeciwnik: |Straznik Klaus Jager|  HP: " << enemy.health << " DMG: 2" << enemy.attackDamage;
@@ -733,7 +764,7 @@ void tankPrologue(Player& player) {
             }
         }
         else if (choice == 2) {
-            Enemy enemy = { 120, 60 }; // Przeciwnik: 100HP, atak 20 obrazen
+            Enemy enemy = { 120, 60 }; 
             typeWriterEffect("*Zaczyna się walka!*");
             cout << "Twoje HP: " << player.health << " Obrazenia ciezkiego ataku:" << player.heavyAttackDamage << " Obrazenia lekkiego ataku:" << player.lightAttackDamage << " amunicja: " << player.ammo << endl;
             cout << "Przeciwnik: |Straznik Klaus Jager|  HP: " << enemy.health << " DMG: " << enemy.attackDamage;
@@ -744,6 +775,11 @@ void tankPrologue(Player& player) {
             else {
                 return;
             }
+        }
+        else {
+            typeWriterEffect("Zla decyzja");
+            player.health = 0;
+            return;
         }
 
         if (player.health == 100) {
@@ -777,6 +813,11 @@ void tankPrologue(Player& player) {
                     typeWriterEffect("*Przechodzisz do Sektion Eins*");
 
 
+                }
+                else {
+                    typeWriterEffect("Zla decyzja");
+                    player.health = 0;
+                    return;
                 }
             }
 
@@ -829,6 +870,11 @@ void tankPrologue(Player& player) {
                     player.key = true;
                     typeWriterEffect("Naturalnie!");
                     typeWriterEffect("*Przechodzisz do Sektion Eins*");
+                }
+                else {
+                    typeWriterEffect("Zla decyzja");
+                    player.health = 0;
+                    return;
                 }
             }
             else if (choice == 2) {
@@ -886,6 +932,11 @@ void tankPrologue(Player& player) {
                         player.key = true;
                         typeWriterEffect("Naturalnie!");
                         typeWriterEffect("*Przechodzisz do Sektion Eins*");
+                    }
+                    else {
+                        typeWriterEffect("Zla decyzja");
+                        player.health = 0;
+                        return;
                     }
                 }
                 else if (choice == 2) {
@@ -1009,10 +1060,22 @@ void tankPrologue(Player& player) {
 
 
 
+                        }else {
+                            typeWriterEffect("Zla decyzja");
+                            player.health = 0;
+                            return;
                         }
-                    }
+                    }else {
+                        typeWriterEffect("Zla decyzja");
+                        player.health = 0;
+                        return;
+                        }
                 }
-            }
+            }else {
+            typeWriterEffect("Zla decyzja");
+            player.health = 0;
+            return;
+        }
 
         }
     }
@@ -1073,6 +1136,11 @@ void tankPrologue(Player& player) {
             }
 
         }
+        else {
+            typeWriterEffect("Zla decyzja");
+            player.health = 0;
+            return;
+        }
         if (player.health > 0) {
             typeWriterEffect("Jestem w jakies sali, trzymaja tu Brada. Widze go w srodku kapsuly. Wyglada inaczej...");
             typeWriterEffect("Drzwi otwieraja sie. To nie jest Brad, ktorego znalem. To cybernetyczny zolnierz, bezmyslna maszyna. Czyli to jest ten caly 'Projekt Overlord'...");
@@ -1095,10 +1163,11 @@ void tankPrologue(Player& player) {
                 cout << "Twoje HP: " << player.health << " Obrazenia ciezkiego ataku:" << player.heavyAttackDamage << " Obrazenia lekkiego ataku:" << player.lightAttackDamage << " Obrazenia karabinu:" << player.sturmgewehrAttack << " amunicja:" << player.ammo << " Obrazenia granatu:" << player.granadeAttack << endl;
                 cout << "Przeciwnik: Overlord 1945  HP: " << enemy.health << "  DMG: " << enemy.attackDamage;
                 battle(player, enemy);
-                if (player.health = 0) {
+                if (player.health < 0) {
+                    player.health = 0;
                     return;
                 }
-                else {
+                else if(player.health > 0){
                     typeWriterEffect("Uszkodzilem go! Pojawily sie szpary pomiedzy plytami pancerza.");
                     typeWriterEffect("Co ty robisz!? Przynosisz nam hanbe! Wykoncz go teraz! - Powiedzialy glosy z glosnikow");
                     typeWriterEffect("Maszyna dostaje szalu, biegnie w twoja strone!");
@@ -1132,6 +1201,10 @@ void tankPrologue(Player& player) {
                             typeWriterEffect("Nie potrzebnie, prosze sir, prosze wykoncz mnie, ja juz tego nie zniose dluzej... - ostatnie slowa Brada");
 
                             typeWriterEffect("Po zacietej walce udaje mi sie pokonac go. Brad ostatecznie pada na ziemie. Czuje bol i zal...");
+                        }
+                        else {
+                            player.health = 0;
+                            return;
                         }
                     }
                     else if (a == 2) {
@@ -1202,6 +1275,11 @@ void tankPrologue(Player& player) {
                         typeWriterEffect("Zrobiles unik, widzisz na stole operacyjnym strzykawke z adrenalina");
                         typeWriterEffect("Zabierasz ja  * +80hp *");
                         player.health += 80;
+                    }
+                    else {
+                        typeWriterEffect("Zla decyzja");
+                        player.health = 0;
+                        return;
                     }
                     typeWriterEffect("Maszyna jest tylem do ciebie, zaczynasz atak");
                     typeWriterEffect("1. rzuc granat i atakuj");
@@ -1291,7 +1369,7 @@ void tankPrologue(Player& player) {
         tankPrologue(player);
 
         if (player.health <= 0) {
-            typeWriterEffect("K.I.A. porazka. Koniec gry!");
+            typeWriterEffect("Porazka. Koniec gry!");
             return 0;
         }
         else {
